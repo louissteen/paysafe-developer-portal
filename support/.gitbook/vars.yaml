@@ -1,0 +1,4 @@
+support_email: integration.support@paysafe.com
+portal_url: https://developer.paysafe.com
+api_base_test: https://api.test.paysafe.com
+api_base_live: https://api.paysafe.com

@@ -1,0 +1,22 @@
+tags:
+  - id: payments-api
+    label: Payments API
+    color: purple
+  - id: cards-api
+    label: Cards API
+    color: blue
+  - id: sdks
+    label: SDKs
+    color: green
+  - id: payment-methods
+    label: Payment methods
+    color: orange
+  - id: shopping-carts
+    label: Shopping carts
+    color: teal
+  - id: onboarding
+    label: Onboarding
+    color: pink
+  - id: breaking
+    label: Breaking change
+    color: red

@@ -1,0 +1,1877 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Paysafe Digital Wallets API",
+    "version": "1.0.0",
+    "description": "Accept payments from Skrill and NETELLER digital wallets, and pay out to them. Includes Crypto On-Ramp for fiat-to-crypto purchases.",
+    "contact": {
+      "name": "Paysafe Developer Support",
+      "url": "https://developer.paysafe.com/en/support/"
+    },
+    "license": {
+      "name": "Paysafe API Terms",
+      "url": "https://www.paysafe.com/en/legal/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.test.paysafe.com/digitalwallets/v1",
+      "description": "Test \u2014 no funds move"
+    },
+    {
+      "url": "https://api.paysafe.com/digitalwallets/v1",
+      "description": "Production"
+    }
+  ],
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Wallet payments",
+      "description": "Operations on payments."
+    },
+    {
+      "name": "Payouts",
+      "description": "Operations on payouts."
+    },
+    {
+      "name": "Customers",
+      "description": "Operations on customers."
+    },
+    {
+      "name": "Crypto On-Ramp",
+      "description": "Let customers buy cryptocurrency with fiat held in a Skrill wallet."
+    }
+  ],
+  "paths": {
+    "/payments": {
+      "post": {
+        "operationId": "createWalletPayment",
+        "summary": "Create a walletpayment",
+        "description": "Creates a new walletpayment. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "tags": [
+          "Wallet payments"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletPayment"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WalletPayment"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "listWalletPayments",
+        "summary": "List payments",
+        "description": "Returns a paginated list of payments, most recent first.",
+        "tags": [
+          "Wallet payments"
+        ],
+        "responses": {
+          "200": {
+            "description": "A paginated list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    "walletPayments": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/WalletPayment"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/MerchantRefNum"
+          }
+        ]
+      }
+    },
+    "/payments/{id}": {
+      "get": {
+        "operationId": "getWalletPayment",
+        "summary": "Get a walletpayment",
+        "description": "Retrieves a single walletpayment by its Paysafe id.",
+        "tags": [
+          "Wallet payments"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletPayment"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ]
+      },
+      "put": {
+        "operationId": "updateWalletPayment",
+        "summary": "Update a walletpayment",
+        "description": "Updates a mutable field on an existing walletpayment.",
+        "tags": [
+          "Wallet payments"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletPayment"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WalletPayment"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payments/{id}/capture": {
+      "post": {
+        "operationId": "captureWalletPayment",
+        "summary": "Capture a wallet payment",
+        "description": "Captures an authorized wallet payment.",
+        "tags": [
+          "Wallet payments"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletPayment"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WalletPayment"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payments/{id}/cancel": {
+      "post": {
+        "operationId": "cancelWalletPayment",
+        "summary": "Cancel a wallet payment",
+        "description": "Cancels a wallet payment before capture.",
+        "tags": [
+          "Wallet payments"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletPayment"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WalletPayment"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payouts": {
+      "post": {
+        "operationId": "createPayout",
+        "summary": "Create a payout",
+        "description": "Creates a new payout. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "tags": [
+          "Payouts"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payout"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Payout"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "listPayouts",
+        "summary": "List payouts",
+        "description": "Returns a paginated list of payouts, most recent first.",
+        "tags": [
+          "Payouts"
+        ],
+        "responses": {
+          "200": {
+            "description": "A paginated list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    "payouts": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Payout"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/MerchantRefNum"
+          }
+        ]
+      }
+    },
+    "/payouts/{id}": {
+      "get": {
+        "operationId": "getPayout",
+        "summary": "Get a payout",
+        "description": "Retrieves a single payout by its Paysafe id.",
+        "tags": [
+          "Payouts"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payout"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ]
+      },
+      "put": {
+        "operationId": "updatePayout",
+        "summary": "Update a payout",
+        "description": "Updates a mutable field on an existing payout.",
+        "tags": [
+          "Payouts"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payout"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Payout"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payouts/{id}/cancel": {
+      "post": {
+        "operationId": "cancelPayout",
+        "summary": "Cancel a payout",
+        "description": "Cancels a payout that has not yet been executed.",
+        "tags": [
+          "Payouts"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payout"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Payout"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers": {
+      "post": {
+        "operationId": "createWalletCustomer",
+        "summary": "Create a walletcustomer",
+        "description": "Creates a new walletcustomer. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "tags": [
+          "Customers"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletCustomer"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WalletCustomer"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "listWalletCustomers",
+        "summary": "List customers",
+        "description": "Returns a paginated list of customers, most recent first.",
+        "tags": [
+          "Customers"
+        ],
+        "responses": {
+          "200": {
+            "description": "A paginated list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    "walletCustomers": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/WalletCustomer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/MerchantRefNum"
+          }
+        ]
+      }
+    },
+    "/customers/{id}": {
+      "get": {
+        "operationId": "getWalletCustomer",
+        "summary": "Get a walletcustomer",
+        "description": "Retrieves a single walletcustomer by its Paysafe id.",
+        "tags": [
+          "Customers"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletCustomer"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ]
+      },
+      "put": {
+        "operationId": "updateWalletCustomer",
+        "summary": "Update a walletcustomer",
+        "description": "Updates a mutable field on an existing walletcustomer.",
+        "tags": [
+          "Customers"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletCustomer"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WalletCustomer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/onramp/quotes": {
+      "post": {
+        "operationId": "createOnRampQuote",
+        "summary": "Create a quote",
+        "description": "Returns an indicative rate and fee breakdown, valid for 60 seconds.",
+        "tags": [
+          "Crypto On-Ramp"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OnRampQuote"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OnRampQuote"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/onramp/quotes/{quoteId}": {
+      "get": {
+        "operationId": "getOnRampQuote",
+        "summary": "Get a quote",
+        "description": "Retrieves a previously created quote and whether it is still valid.",
+        "tags": [
+          "Crypto On-Ramp"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OnRampQuote"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "quoteId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the quote.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ]
+      }
+    },
+    "/onramp/orders": {
+      "post": {
+        "operationId": "createOnRampOrder",
+        "summary": "Create an order",
+        "description": "Executes a fiat-to-crypto purchase against a live quote.",
+        "tags": [
+          "Crypto On-Ramp"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OnRampOrder"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OnRampOrder"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "listOnRampOrders",
+        "summary": "List orders",
+        "description": "Returns a paginated list of on-ramp orders.",
+        "tags": [
+          "Crypto On-Ramp"
+        ],
+        "responses": {
+          "200": {
+            "description": "A paginated list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    "onRampOrders": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/OnRampOrder"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/MerchantRefNum"
+          }
+        ]
+      }
+    },
+    "/onramp/orders/{orderId}": {
+      "get": {
+        "operationId": "getOnRampOrder",
+        "summary": "Get an order",
+        "description": "Retrieves a single on-ramp order.",
+        "tags": [
+          "Crypto On-Ramp"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OnRampOrder"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the order.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ]
+      }
+    },
+    "/onramp/assets": {
+      "get": {
+        "operationId": "listOnRampAssets",
+        "summary": "List supported assets",
+        "description": "Returns the cryptocurrencies available to the customer, by jurisdiction.",
+        "tags": [
+          "Crypto On-Ramp"
+        ],
+        "responses": {
+          "200": {
+            "description": "A paginated list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    "onRampAssets": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/OnRampAsset"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/MerchantRefNum"
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic",
+        "description": "Base64-encoded `apiUsername:apiPassword` from the Merchant Portal."
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "example": "5068"
+              },
+              "message": {
+                "type": "string",
+                "example": "Either you submitted a request that is missing a mandatory field or the value of a field does not match the format expected."
+              },
+              "details": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "fieldErrors": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "field": {
+                      "type": "string",
+                      "example": "card.cardNum"
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "Invalid card number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Amount": {
+        "type": "integer",
+        "format": "int64",
+        "minimum": 1,
+        "description": "Amount in the currency's minor unit (see Currency codes).",
+        "example": 4999
+      },
+      "CurrencyCode": {
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 3,
+        "example": "USD"
+      },
+      "BillingDetails": {
+        "type": "object",
+        "properties": {
+          "street": {
+            "type": "string",
+            "example": "100 Queen Street West"
+          },
+          "street2": {
+            "type": "string",
+            "example": "Suite 3200"
+          },
+          "city": {
+            "type": "string",
+            "example": "Toronto"
+          },
+          "state": {
+            "type": "string",
+            "example": "ON"
+          },
+          "country": {
+            "type": "string",
+            "example": "CA"
+          },
+          "zip": {
+            "type": "string",
+            "example": "M5H 2N2"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+1-416-555-0143"
+          }
+        }
+      },
+      "Card": {
+        "type": "object",
+        "properties": {
+          "cardNum": {
+            "type": "string",
+            "example": "4111111111111111"
+          },
+          "lastDigits": {
+            "type": "string",
+            "readOnly": true,
+            "example": "1111"
+          },
+          "cardBin": {
+            "type": "string",
+            "readOnly": true,
+            "example": "411111"
+          },
+          "cardExpiry": {
+            "type": "object",
+            "properties": {
+              "month": {
+                "type": "integer",
+                "example": 11
+              },
+              "year": {
+                "type": "integer",
+                "example": 2029
+              }
+            }
+          },
+          "cvv": {
+            "type": "string",
+            "writeOnly": true,
+            "example": "123"
+          },
+          "holderName": {
+            "type": "string",
+            "example": "Jane Ellery"
+          },
+          "cardType": {
+            "type": "string",
+            "enum": [
+              "VI",
+              "MC",
+              "AM",
+              "DI",
+              "JC",
+              "MD",
+              "SO",
+              "DC"
+            ],
+            "example": "VI"
+          },
+          "networkToken": {
+            "type": "object",
+            "properties": {
+              "bin": {
+                "type": "string"
+              },
+              "lastDigits": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "Jane"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Ellery"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "jane.ellery@example.com"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+1-416-555-0143"
+          },
+          "dateOfBirth": {
+            "type": "object",
+            "properties": {
+              "day": {
+                "type": "integer"
+              },
+              "month": {
+                "type": "integer"
+              },
+              "year": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      },
+      "Links": {
+        "type": "array",
+        "readOnly": true,
+        "items": {
+          "type": "object",
+          "properties": {
+            "rel": {
+              "type": "string",
+              "example": "self"
+            },
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      },
+      "Pagination": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "example": 0
+          },
+          "limit": {
+            "type": "integer",
+            "example": 10
+          },
+          "totalItems": {
+            "type": "integer",
+            "example": 137
+          }
+        }
+      },
+      "WalletPayment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "COMPLETED",
+              "HELD",
+              "FAILED",
+              "CANCELLED",
+              "PENDING",
+              "PROCESSING"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/BillingDetails"
+          },
+          "description": {
+            "type": "string",
+            "example": "WalletPayment created via the Paysafe API"
+          }
+        }
+      },
+      "Payout": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "COMPLETED",
+              "HELD",
+              "FAILED",
+              "CANCELLED",
+              "PENDING",
+              "PROCESSING"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/BillingDetails"
+          },
+          "description": {
+            "type": "string",
+            "example": "Payout created via the Paysafe API"
+          }
+        }
+      },
+      "WalletCustomer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "COMPLETED",
+              "HELD",
+              "FAILED",
+              "CANCELLED",
+              "PENDING",
+              "PROCESSING"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/BillingDetails"
+          },
+          "description": {
+            "type": "string",
+            "example": "WalletCustomer created via the Paysafe API"
+          }
+        }
+      },
+      "OnRampQuote": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "COMPLETED",
+              "HELD",
+              "FAILED",
+              "CANCELLED",
+              "PENDING",
+              "PROCESSING"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/BillingDetails"
+          },
+          "description": {
+            "type": "string",
+            "example": "OnRampQuote created via the Paysafe API"
+          }
+        }
+      },
+      "OnRampOrder": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "COMPLETED",
+              "HELD",
+              "FAILED",
+              "CANCELLED",
+              "PENDING",
+              "PROCESSING"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/BillingDetails"
+          },
+          "description": {
+            "type": "string",
+            "example": "OnRampOrder created via the Paysafe API"
+          }
+        }
+      },
+      "OnRampAsset": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "COMPLETED",
+              "HELD",
+              "FAILED",
+              "CANCELLED",
+              "PENDING",
+              "PROCESSING"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/BillingDetails"
+          },
+          "description": {
+            "type": "string",
+            "example": "OnRampAsset created via the Paysafe API"
+          }
+        }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad request \u2014 a field is missing or malformed.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Authentication failed.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Declined": {
+        "description": "The transaction was declined.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "The resource was not found.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Conflict": {
+        "description": "Duplicate `merchantRefNum`.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "ServerError": {
+        "description": "Unexpected error.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "Limit": {
+        "name": "limit",
+        "in": "query",
+        "schema": {
+          "type": "integer",
+          "default": 10,
+          "maximum": 100
+        },
+        "description": "Number of records to return."
+      },
+      "Offset": {
+        "name": "offset",
+        "in": "query",
+        "schema": {
+          "type": "integer",
+          "default": 0
+        },
+        "description": "Zero-based index of the first record to return."
+      },
+      "MerchantRefNum": {
+        "name": "merchantRefNum",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        },
+        "description": "Filter by your own reference number."
+      }
+    }
+  }
+}

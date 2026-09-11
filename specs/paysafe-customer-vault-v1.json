@@ -1,0 +1,2481 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Paysafe Customer Vault API",
+    "version": "1.0.0",
+    "description": "Securely store customer profiles, cards, bank accounts and addresses so that repeat and recurring payments never touch raw instrument data in your systems.",
+    "contact": {
+      "name": "Paysafe Developer Support",
+      "url": "https://developer.paysafe.com/en/support/"
+    },
+    "license": {
+      "name": "Paysafe API Terms",
+      "url": "https://www.paysafe.com/en/legal/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.test.paysafe.com/customervault/v1",
+      "description": "Test \u2014 no funds move"
+    },
+    {
+      "url": "https://api.paysafe.com/customervault/v1",
+      "description": "Production"
+    }
+  ],
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Profiles",
+      "description": "Operations on profiles."
+    },
+    {
+      "name": "Addresses",
+      "description": "Operations on profiles/{profileId}/addresses."
+    },
+    {
+      "name": "Cards",
+      "description": "Operations on profiles/{profileId}/cards."
+    },
+    {
+      "name": "ACH bank accounts",
+      "description": "Operations on profiles/{profileId}/achbankaccounts."
+    },
+    {
+      "name": "EFT bank accounts",
+      "description": "Operations on profiles/{profileId}/eftbankaccounts."
+    },
+    {
+      "name": "SEPA bank accounts",
+      "description": "Operations on profiles/{profileId}/sepabankaccounts."
+    },
+    {
+      "name": "Single-use tokens",
+      "description": "Exchange a single-use token for a permanent vault token."
+    }
+  ],
+  "paths": {
+    "/profiles": {
+      "post": {
+        "operationId": "createProfile",
+        "summary": "Create a profile",
+        "description": "Creates a new profile. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "tags": [
+          "Profiles"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profile2"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Profile2"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "listProfiles",
+        "summary": "List profiles",
+        "description": "Returns a paginated list of profiles, most recent first.",
+        "tags": [
+          "Profiles"
+        ],
+        "responses": {
+          "200": {
+            "description": "A paginated list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    "profile2s": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Profile2"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/MerchantRefNum"
+          }
+        ]
+      }
+    },
+    "/profiles/{id}": {
+      "get": {
+        "operationId": "getProfile",
+        "summary": "Get a profile",
+        "description": "Retrieves a single profile by its Paysafe id.",
+        "tags": [
+          "Profiles"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profile2"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ]
+      },
+      "put": {
+        "operationId": "updateProfile",
+        "summary": "Update a profile",
+        "description": "Updates a mutable field on an existing profile.",
+        "tags": [
+          "Profiles"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profile2"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Profile2"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/profiles/{profileId}/addresses": {
+      "post": {
+        "operationId": "createAddress",
+        "summary": "Create a address",
+        "description": "Creates a new address. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "tags": [
+          "Addresses"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Address"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the profile.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Address"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "listAddresss",
+        "summary": "List profiles/{profileId}/addresses",
+        "description": "Returns a paginated list of profiles/{profileId}/addresses, most recent first.",
+        "tags": [
+          "Addresses"
+        ],
+        "responses": {
+          "200": {
+            "description": "A paginated list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    "addresss": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Address"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the profile.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/MerchantRefNum"
+          }
+        ]
+      }
+    },
+    "/profiles/{profileId}/addresses/{id}": {
+      "get": {
+        "operationId": "getAddress",
+        "summary": "Get a address",
+        "description": "Retrieves a single address by its Paysafe id.",
+        "tags": [
+          "Addresses"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Address"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the profile.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ]
+      },
+      "put": {
+        "operationId": "updateAddress",
+        "summary": "Update a address",
+        "description": "Updates a mutable field on an existing address.",
+        "tags": [
+          "Addresses"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Address"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the profile.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Address"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/profiles/{profileId}/cards": {
+      "post": {
+        "operationId": "createVaultCard",
+        "summary": "Create a vaultcard",
+        "description": "Creates a new vaultcard. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "tags": [
+          "Cards"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VaultCard"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the profile.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VaultCard"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "listVaultCards",
+        "summary": "List profiles/{profileId}/cards",
+        "description": "Returns a paginated list of profiles/{profileId}/cards, most recent first.",
+        "tags": [
+          "Cards"
+        ],
+        "responses": {
+          "200": {
+            "description": "A paginated list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    "vaultCards": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/VaultCard"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the profile.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/MerchantRefNum"
+          }
+        ]
+      }
+    },
+    "/profiles/{profileId}/cards/{id}": {
+      "get": {
+        "operationId": "getVaultCard",
+        "summary": "Get a vaultcard",
+        "description": "Retrieves a single vaultcard by its Paysafe id.",
+        "tags": [
+          "Cards"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VaultCard"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the profile.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ]
+      },
+      "put": {
+        "operationId": "updateVaultCard",
+        "summary": "Update a vaultcard",
+        "description": "Updates a mutable field on an existing vaultcard.",
+        "tags": [
+          "Cards"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VaultCard"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the profile.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VaultCard"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/profiles/{profileId}/cards/{id}/verify": {
+      "post": {
+        "operationId": "verifyVaultCard",
+        "summary": "Verify a stored card",
+        "description": "Runs a zero-dollar verification against the stored card.",
+        "tags": [
+          "Cards"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VaultCard"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the profile.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VaultCard"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/profiles/{profileId}/achbankaccounts": {
+      "post": {
+        "operationId": "createACHBankAccount",
+        "summary": "Create a achbankaccount",
+        "description": "Creates a new achbankaccount. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "tags": [
+          "ACH bank accounts"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ACHBankAccount"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the profile.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ACHBankAccount"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "listACHBankAccounts",
+        "summary": "List profiles/{profileId}/achbankaccounts",
+        "description": "Returns a paginated list of profiles/{profileId}/achbankaccounts, most recent first.",
+        "tags": [
+          "ACH bank accounts"
+        ],
+        "responses": {
+          "200": {
+            "description": "A paginated list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    "aCHBankAccounts": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ACHBankAccount"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the profile.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/MerchantRefNum"
+          }
+        ]
+      }
+    },
+    "/profiles/{profileId}/achbankaccounts/{id}": {
+      "get": {
+        "operationId": "getACHBankAccount",
+        "summary": "Get a achbankaccount",
+        "description": "Retrieves a single achbankaccount by its Paysafe id.",
+        "tags": [
+          "ACH bank accounts"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ACHBankAccount"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the profile.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ]
+      },
+      "put": {
+        "operationId": "updateACHBankAccount",
+        "summary": "Update a achbankaccount",
+        "description": "Updates a mutable field on an existing achbankaccount.",
+        "tags": [
+          "ACH bank accounts"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ACHBankAccount"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the profile.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ACHBankAccount"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/profiles/{profileId}/eftbankaccounts": {
+      "post": {
+        "operationId": "createEFTBankAccount",
+        "summary": "Create a eftbankaccount",
+        "description": "Creates a new eftbankaccount. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "tags": [
+          "EFT bank accounts"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EFTBankAccount"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the profile.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EFTBankAccount"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "listEFTBankAccounts",
+        "summary": "List profiles/{profileId}/eftbankaccounts",
+        "description": "Returns a paginated list of profiles/{profileId}/eftbankaccounts, most recent first.",
+        "tags": [
+          "EFT bank accounts"
+        ],
+        "responses": {
+          "200": {
+            "description": "A paginated list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    "eFTBankAccounts": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/EFTBankAccount"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the profile.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/MerchantRefNum"
+          }
+        ]
+      }
+    },
+    "/profiles/{profileId}/eftbankaccounts/{id}": {
+      "get": {
+        "operationId": "getEFTBankAccount",
+        "summary": "Get a eftbankaccount",
+        "description": "Retrieves a single eftbankaccount by its Paysafe id.",
+        "tags": [
+          "EFT bank accounts"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EFTBankAccount"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the profile.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ]
+      },
+      "put": {
+        "operationId": "updateEFTBankAccount",
+        "summary": "Update a eftbankaccount",
+        "description": "Updates a mutable field on an existing eftbankaccount.",
+        "tags": [
+          "EFT bank accounts"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EFTBankAccount"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the profile.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EFTBankAccount"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/profiles/{profileId}/sepabankaccounts": {
+      "post": {
+        "operationId": "createSEPABankAccount",
+        "summary": "Create a sepabankaccount",
+        "description": "Creates a new sepabankaccount. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "tags": [
+          "SEPA bank accounts"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SEPABankAccount"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the profile.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SEPABankAccount"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "listSEPABankAccounts",
+        "summary": "List profiles/{profileId}/sepabankaccounts",
+        "description": "Returns a paginated list of profiles/{profileId}/sepabankaccounts, most recent first.",
+        "tags": [
+          "SEPA bank accounts"
+        ],
+        "responses": {
+          "200": {
+            "description": "A paginated list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    "sEPABankAccounts": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/SEPABankAccount"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the profile.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/MerchantRefNum"
+          }
+        ]
+      }
+    },
+    "/profiles/{profileId}/sepabankaccounts/{id}": {
+      "get": {
+        "operationId": "getSEPABankAccount",
+        "summary": "Get a sepabankaccount",
+        "description": "Retrieves a single sepabankaccount by its Paysafe id.",
+        "tags": [
+          "SEPA bank accounts"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SEPABankAccount"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the profile.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ]
+      },
+      "put": {
+        "operationId": "updateSEPABankAccount",
+        "summary": "Update a sepabankaccount",
+        "description": "Updates a mutable field on an existing sepabankaccount.",
+        "tags": [
+          "SEPA bank accounts"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SEPABankAccount"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the profile.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SEPABankAccount"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/singleusetokens": {
+      "post": {
+        "operationId": "createSingleUseToken",
+        "summary": "Create a single-use token",
+        "description": "Creates a token that can be used exactly once, within 15 minutes, to create a permanent vault entry.",
+        "tags": [
+          "Single-use tokens"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleUseToken"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SingleUseToken"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/singleusetokens/{tokenId}": {
+      "get": {
+        "operationId": "getSingleUseToken",
+        "summary": "Get a single-use token",
+        "description": "Retrieves the status of a single-use token.",
+        "tags": [
+          "Single-use tokens"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleUseToken"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "tokenId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the token.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic",
+        "description": "Base64-encoded `apiUsername:apiPassword` from the Merchant Portal."
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "example": "5068"
+              },
+              "message": {
+                "type": "string",
+                "example": "Either you submitted a request that is missing a mandatory field or the value of a field does not match the format expected."
+              },
+              "details": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "fieldErrors": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "field": {
+                      "type": "string",
+                      "example": "card.cardNum"
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "Invalid card number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Amount": {
+        "type": "integer",
+        "format": "int64",
+        "minimum": 1,
+        "description": "Amount in the currency's minor unit (see Currency codes).",
+        "example": 4999
+      },
+      "CurrencyCode": {
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 3,
+        "example": "USD"
+      },
+      "BillingDetails": {
+        "type": "object",
+        "properties": {
+          "street": {
+            "type": "string",
+            "example": "100 Queen Street West"
+          },
+          "street2": {
+            "type": "string",
+            "example": "Suite 3200"
+          },
+          "city": {
+            "type": "string",
+            "example": "Toronto"
+          },
+          "state": {
+            "type": "string",
+            "example": "ON"
+          },
+          "country": {
+            "type": "string",
+            "example": "CA"
+          },
+          "zip": {
+            "type": "string",
+            "example": "M5H 2N2"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+1-416-555-0143"
+          }
+        }
+      },
+      "Card": {
+        "type": "object",
+        "properties": {
+          "cardNum": {
+            "type": "string",
+            "example": "4111111111111111"
+          },
+          "lastDigits": {
+            "type": "string",
+            "readOnly": true,
+            "example": "1111"
+          },
+          "cardBin": {
+            "type": "string",
+            "readOnly": true,
+            "example": "411111"
+          },
+          "cardExpiry": {
+            "type": "object",
+            "properties": {
+              "month": {
+                "type": "integer",
+                "example": 11
+              },
+              "year": {
+                "type": "integer",
+                "example": 2029
+              }
+            }
+          },
+          "cvv": {
+            "type": "string",
+            "writeOnly": true,
+            "example": "123"
+          },
+          "holderName": {
+            "type": "string",
+            "example": "Jane Ellery"
+          },
+          "cardType": {
+            "type": "string",
+            "enum": [
+              "VI",
+              "MC",
+              "AM",
+              "DI",
+              "JC",
+              "MD",
+              "SO",
+              "DC"
+            ],
+            "example": "VI"
+          },
+          "networkToken": {
+            "type": "object",
+            "properties": {
+              "bin": {
+                "type": "string"
+              },
+              "lastDigits": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "Jane"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Ellery"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "jane.ellery@example.com"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+1-416-555-0143"
+          },
+          "dateOfBirth": {
+            "type": "object",
+            "properties": {
+              "day": {
+                "type": "integer"
+              },
+              "month": {
+                "type": "integer"
+              },
+              "year": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      },
+      "Links": {
+        "type": "array",
+        "readOnly": true,
+        "items": {
+          "type": "object",
+          "properties": {
+            "rel": {
+              "type": "string",
+              "example": "self"
+            },
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      },
+      "Pagination": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "example": 0
+          },
+          "limit": {
+            "type": "integer",
+            "example": 10
+          },
+          "totalItems": {
+            "type": "integer",
+            "example": 137
+          }
+        }
+      },
+      "Profile2": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "COMPLETED",
+              "HELD",
+              "FAILED",
+              "CANCELLED",
+              "PENDING",
+              "PROCESSING"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/BillingDetails"
+          },
+          "description": {
+            "type": "string",
+            "example": "Profile2 created via the Paysafe API"
+          }
+        }
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "COMPLETED",
+              "HELD",
+              "FAILED",
+              "CANCELLED",
+              "PENDING",
+              "PROCESSING"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/BillingDetails"
+          },
+          "description": {
+            "type": "string",
+            "example": "Address created via the Paysafe API"
+          }
+        }
+      },
+      "VaultCard": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "COMPLETED",
+              "HELD",
+              "FAILED",
+              "CANCELLED",
+              "PENDING",
+              "PROCESSING"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/BillingDetails"
+          },
+          "description": {
+            "type": "string",
+            "example": "VaultCard created via the Paysafe API"
+          }
+        }
+      },
+      "ACHBankAccount": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "COMPLETED",
+              "HELD",
+              "FAILED",
+              "CANCELLED",
+              "PENDING",
+              "PROCESSING"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/BillingDetails"
+          },
+          "description": {
+            "type": "string",
+            "example": "ACHBankAccount created via the Paysafe API"
+          }
+        }
+      },
+      "EFTBankAccount": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "COMPLETED",
+              "HELD",
+              "FAILED",
+              "CANCELLED",
+              "PENDING",
+              "PROCESSING"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/BillingDetails"
+          },
+          "description": {
+            "type": "string",
+            "example": "EFTBankAccount created via the Paysafe API"
+          }
+        }
+      },
+      "SEPABankAccount": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "COMPLETED",
+              "HELD",
+              "FAILED",
+              "CANCELLED",
+              "PENDING",
+              "PROCESSING"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/BillingDetails"
+          },
+          "description": {
+            "type": "string",
+            "example": "SEPABankAccount created via the Paysafe API"
+          }
+        }
+      },
+      "SingleUseToken": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "COMPLETED",
+              "HELD",
+              "FAILED",
+              "CANCELLED",
+              "PENDING",
+              "PROCESSING"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/BillingDetails"
+          },
+          "description": {
+            "type": "string",
+            "example": "SingleUseToken created via the Paysafe API"
+          }
+        }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad request \u2014 a field is missing or malformed.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Authentication failed.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Declined": {
+        "description": "The transaction was declined.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "The resource was not found.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Conflict": {
+        "description": "Duplicate `merchantRefNum`.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "ServerError": {
+        "description": "Unexpected error.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "Limit": {
+        "name": "limit",
+        "in": "query",
+        "schema": {
+          "type": "integer",
+          "default": 10,
+          "maximum": 100
+        },
+        "description": "Number of records to return."
+      },
+      "Offset": {
+        "name": "offset",
+        "in": "query",
+        "schema": {
+          "type": "integer",
+          "default": 0
+        },
+        "description": "Zero-based index of the first record to return."
+      },
+      "MerchantRefNum": {
+        "name": "merchantRefNum",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        },
+        "description": "Filter by your own reference number."
+      }
+    }
+  }
+}

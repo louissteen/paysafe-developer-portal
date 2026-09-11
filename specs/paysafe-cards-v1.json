@@ -1,0 +1,2368 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Paysafe Cards API",
+    "version": "1.0.0",
+    "description": "The Cards API is Paysafe's long-standing card-processing interface. It remains fully supported for existing integrations; new integrations should use the Payments API.",
+    "contact": {
+      "name": "Paysafe Developer Support",
+      "url": "https://developer.paysafe.com/en/support/"
+    },
+    "license": {
+      "name": "Paysafe API Terms",
+      "url": "https://www.paysafe.com/en/legal/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.test.paysafe.com/cardpayments/v1",
+      "description": "Test \u2014 no funds move"
+    },
+    {
+      "url": "https://api.paysafe.com/cardpayments/v1",
+      "description": "Production"
+    }
+  ],
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Authorizations",
+      "description": "Operations on auths."
+    },
+    {
+      "name": "Settlements",
+      "description": "Operations on settlements."
+    },
+    {
+      "name": "Credits",
+      "description": "Operations on credits."
+    },
+    {
+      "name": "Void authorizations",
+      "description": "Operations on voidauths."
+    },
+    {
+      "name": "Original credits",
+      "description": "Operations on originalcredits."
+    },
+    {
+      "name": "Account verification",
+      "description": "Zero-dollar verification of a card without charging it."
+    },
+    {
+      "name": "Network tokens",
+      "description": "Provision and manage network tokens for stored cards."
+    }
+  ],
+  "paths": {
+    "/auths": {
+      "post": {
+        "operationId": "createAuth",
+        "summary": "Create a auth",
+        "description": "Creates a new auth. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "tags": [
+          "Authorizations"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Auth"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auth"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "listAuths",
+        "summary": "List auths",
+        "description": "Returns a paginated list of auths, most recent first.",
+        "tags": [
+          "Authorizations"
+        ],
+        "responses": {
+          "200": {
+            "description": "A paginated list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    "auths": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Auth"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/MerchantRefNum"
+          }
+        ]
+      }
+    },
+    "/auths/{id}": {
+      "get": {
+        "operationId": "getAuth",
+        "summary": "Get a auth",
+        "description": "Retrieves a single auth by its Paysafe id.",
+        "tags": [
+          "Authorizations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Auth"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ]
+      },
+      "put": {
+        "operationId": "updateAuth",
+        "summary": "Update a auth",
+        "description": "Updates a mutable field on an existing auth.",
+        "tags": [
+          "Authorizations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Auth"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auth"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auths/{id}/settle": {
+      "post": {
+        "operationId": "settleAuth",
+        "summary": "Settle an authorization",
+        "description": "Captures funds on an approved authorization.",
+        "tags": [
+          "Authorizations"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Auth"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auth"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auths/{id}/void": {
+      "post": {
+        "operationId": "voidAuth",
+        "summary": "Void an authorization",
+        "description": "Reverses an authorization before settlement.",
+        "tags": [
+          "Authorizations"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Auth"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auth"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/settlements": {
+      "post": {
+        "operationId": "createSettlement",
+        "summary": "Create a settlement",
+        "description": "Creates a new settlement. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "tags": [
+          "Settlements"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Settlement"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Settlement"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "listSettlements",
+        "summary": "List settlements",
+        "description": "Returns a paginated list of settlements, most recent first.",
+        "tags": [
+          "Settlements"
+        ],
+        "responses": {
+          "200": {
+            "description": "A paginated list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    "settlements": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Settlement"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/MerchantRefNum"
+          }
+        ]
+      }
+    },
+    "/settlements/{id}": {
+      "get": {
+        "operationId": "getSettlement",
+        "summary": "Get a settlement",
+        "description": "Retrieves a single settlement by its Paysafe id.",
+        "tags": [
+          "Settlements"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Settlement"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ]
+      },
+      "put": {
+        "operationId": "updateSettlement",
+        "summary": "Update a settlement",
+        "description": "Updates a mutable field on an existing settlement.",
+        "tags": [
+          "Settlements"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Settlement"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Settlement"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/credits": {
+      "post": {
+        "operationId": "createCredit",
+        "summary": "Create a credit",
+        "description": "Creates a new credit. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "tags": [
+          "Credits"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Credit"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Credit"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "listCredits",
+        "summary": "List credits",
+        "description": "Returns a paginated list of credits, most recent first.",
+        "tags": [
+          "Credits"
+        ],
+        "responses": {
+          "200": {
+            "description": "A paginated list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    "credits": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Credit"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/MerchantRefNum"
+          }
+        ]
+      }
+    },
+    "/credits/{id}": {
+      "get": {
+        "operationId": "getCredit",
+        "summary": "Get a credit",
+        "description": "Retrieves a single credit by its Paysafe id.",
+        "tags": [
+          "Credits"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Credit"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ]
+      },
+      "put": {
+        "operationId": "updateCredit",
+        "summary": "Update a credit",
+        "description": "Updates a mutable field on an existing credit.",
+        "tags": [
+          "Credits"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Credit"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Credit"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/voidauths": {
+      "post": {
+        "operationId": "createVoid",
+        "summary": "Create a void",
+        "description": "Creates a new void. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "tags": [
+          "Void authorizations"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoidAuth"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VoidAuth"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "listVoids",
+        "summary": "List voidauths",
+        "description": "Returns a paginated list of voidauths, most recent first.",
+        "tags": [
+          "Void authorizations"
+        ],
+        "responses": {
+          "200": {
+            "description": "A paginated list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    "voidAuths": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/VoidAuth"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/MerchantRefNum"
+          }
+        ]
+      }
+    },
+    "/voidauths/{id}": {
+      "get": {
+        "operationId": "getVoid",
+        "summary": "Get a void",
+        "description": "Retrieves a single void by its Paysafe id.",
+        "tags": [
+          "Void authorizations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoidAuth"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ]
+      },
+      "put": {
+        "operationId": "updateVoid",
+        "summary": "Update a void",
+        "description": "Updates a mutable field on an existing void.",
+        "tags": [
+          "Void authorizations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoidAuth"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VoidAuth"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/originalcredits": {
+      "post": {
+        "operationId": "createOriginalCredit",
+        "summary": "Create a originalcredit",
+        "description": "Creates a new originalcredit. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "tags": [
+          "Original credits"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OriginalCredit"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OriginalCredit"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "listOriginalCredits",
+        "summary": "List originalcredits",
+        "description": "Returns a paginated list of originalcredits, most recent first.",
+        "tags": [
+          "Original credits"
+        ],
+        "responses": {
+          "200": {
+            "description": "A paginated list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    "originalCredits": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/OriginalCredit"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/MerchantRefNum"
+          }
+        ]
+      }
+    },
+    "/originalcredits/{id}": {
+      "get": {
+        "operationId": "getOriginalCredit",
+        "summary": "Get a originalcredit",
+        "description": "Retrieves a single originalcredit by its Paysafe id.",
+        "tags": [
+          "Original credits"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OriginalCredit"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ]
+      },
+      "put": {
+        "operationId": "updateOriginalCredit",
+        "summary": "Update a originalcredit",
+        "description": "Updates a mutable field on an existing originalcredit.",
+        "tags": [
+          "Original credits"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OriginalCredit"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OriginalCredit"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/originalcredits/{id}/cancel": {
+      "post": {
+        "operationId": "cancelOriginalCredit",
+        "summary": "Cancel an original credit",
+        "description": "Cancels a pending original credit.",
+        "tags": [
+          "Original credits"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OriginalCredit"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the id.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OriginalCredit"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/verifications": {
+      "post": {
+        "operationId": "createCardVerification",
+        "summary": "Verify a card",
+        "description": "Performs a zero-dollar authorization to confirm the card is valid and to run AVS and CVV checks.",
+        "tags": [
+          "Account verification"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Verification"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Verification"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "listCardVerifications",
+        "summary": "List verifications",
+        "description": "Returns a paginated list of verifications.",
+        "tags": [
+          "Account verification"
+        ],
+        "responses": {
+          "200": {
+            "description": "A paginated list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    "verifications": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Verification"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/MerchantRefNum"
+          }
+        ]
+      }
+    },
+    "/verifications/{verificationId}": {
+      "get": {
+        "operationId": "getCardVerification",
+        "summary": "Get a verification",
+        "description": "Retrieves a single verification result.",
+        "tags": [
+          "Account verification"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Verification"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "verificationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the verification.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ]
+      }
+    },
+    "/networktokens": {
+      "post": {
+        "operationId": "createNetworkToken",
+        "summary": "Provision a network token",
+        "description": "Requests a network token from the card scheme for a stored card.",
+        "tags": [
+          "Network tokens"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NetworkToken"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NetworkToken"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/networktokens/{tokenId}": {
+      "get": {
+        "operationId": "getNetworkToken",
+        "summary": "Get a network token",
+        "description": "Retrieves the state and metadata of a provisioned network token.",
+        "tags": [
+          "Network tokens"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NetworkToken"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "tokenId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the token.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "deleteNetworkToken",
+        "summary": "Delete a network token",
+        "description": "De-provisions the token with the scheme.",
+        "tags": [
+          "Network tokens"
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted. No content returned."
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/Declined"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "tokenId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the token.",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic",
+        "description": "Base64-encoded `apiUsername:apiPassword` from the Merchant Portal."
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "example": "5068"
+              },
+              "message": {
+                "type": "string",
+                "example": "Either you submitted a request that is missing a mandatory field or the value of a field does not match the format expected."
+              },
+              "details": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "fieldErrors": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "field": {
+                      "type": "string",
+                      "example": "card.cardNum"
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "Invalid card number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Amount": {
+        "type": "integer",
+        "format": "int64",
+        "minimum": 1,
+        "description": "Amount in the currency's minor unit (see Currency codes).",
+        "example": 4999
+      },
+      "CurrencyCode": {
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 3,
+        "example": "USD"
+      },
+      "BillingDetails": {
+        "type": "object",
+        "properties": {
+          "street": {
+            "type": "string",
+            "example": "100 Queen Street West"
+          },
+          "street2": {
+            "type": "string",
+            "example": "Suite 3200"
+          },
+          "city": {
+            "type": "string",
+            "example": "Toronto"
+          },
+          "state": {
+            "type": "string",
+            "example": "ON"
+          },
+          "country": {
+            "type": "string",
+            "example": "CA"
+          },
+          "zip": {
+            "type": "string",
+            "example": "M5H 2N2"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+1-416-555-0143"
+          }
+        }
+      },
+      "Card": {
+        "type": "object",
+        "properties": {
+          "cardNum": {
+            "type": "string",
+            "example": "4111111111111111"
+          },
+          "lastDigits": {
+            "type": "string",
+            "readOnly": true,
+            "example": "1111"
+          },
+          "cardBin": {
+            "type": "string",
+            "readOnly": true,
+            "example": "411111"
+          },
+          "cardExpiry": {
+            "type": "object",
+            "properties": {
+              "month": {
+                "type": "integer",
+                "example": 11
+              },
+              "year": {
+                "type": "integer",
+                "example": 2029
+              }
+            }
+          },
+          "cvv": {
+            "type": "string",
+            "writeOnly": true,
+            "example": "123"
+          },
+          "holderName": {
+            "type": "string",
+            "example": "Jane Ellery"
+          },
+          "cardType": {
+            "type": "string",
+            "enum": [
+              "VI",
+              "MC",
+              "AM",
+              "DI",
+              "JC",
+              "MD",
+              "SO",
+              "DC"
+            ],
+            "example": "VI"
+          },
+          "networkToken": {
+            "type": "object",
+            "properties": {
+              "bin": {
+                "type": "string"
+              },
+              "lastDigits": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "Jane"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Ellery"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "jane.ellery@example.com"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+1-416-555-0143"
+          },
+          "dateOfBirth": {
+            "type": "object",
+            "properties": {
+              "day": {
+                "type": "integer"
+              },
+              "month": {
+                "type": "integer"
+              },
+              "year": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      },
+      "Links": {
+        "type": "array",
+        "readOnly": true,
+        "items": {
+          "type": "object",
+          "properties": {
+            "rel": {
+              "type": "string",
+              "example": "self"
+            },
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      },
+      "Pagination": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "example": 0
+          },
+          "limit": {
+            "type": "integer",
+            "example": 10
+          },
+          "totalItems": {
+            "type": "integer",
+            "example": 137
+          }
+        }
+      },
+      "Auth": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "COMPLETED",
+              "HELD",
+              "FAILED",
+              "CANCELLED",
+              "PENDING",
+              "PROCESSING"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/BillingDetails"
+          },
+          "description": {
+            "type": "string",
+            "example": "Auth created via the Paysafe API"
+          }
+        }
+      },
+      "Settlement": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "COMPLETED",
+              "HELD",
+              "FAILED",
+              "CANCELLED",
+              "PENDING",
+              "PROCESSING"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/BillingDetails"
+          },
+          "description": {
+            "type": "string",
+            "example": "Settlement created via the Paysafe API"
+          }
+        }
+      },
+      "Credit": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "COMPLETED",
+              "HELD",
+              "FAILED",
+              "CANCELLED",
+              "PENDING",
+              "PROCESSING"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/BillingDetails"
+          },
+          "description": {
+            "type": "string",
+            "example": "Credit created via the Paysafe API"
+          }
+        }
+      },
+      "VoidAuth": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "COMPLETED",
+              "HELD",
+              "FAILED",
+              "CANCELLED",
+              "PENDING",
+              "PROCESSING"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/BillingDetails"
+          },
+          "description": {
+            "type": "string",
+            "example": "VoidAuth created via the Paysafe API"
+          }
+        }
+      },
+      "OriginalCredit": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "COMPLETED",
+              "HELD",
+              "FAILED",
+              "CANCELLED",
+              "PENDING",
+              "PROCESSING"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/BillingDetails"
+          },
+          "description": {
+            "type": "string",
+            "example": "OriginalCredit created via the Paysafe API"
+          }
+        }
+      },
+      "Verification": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "COMPLETED",
+              "HELD",
+              "FAILED",
+              "CANCELLED",
+              "PENDING",
+              "PROCESSING"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/BillingDetails"
+          },
+          "description": {
+            "type": "string",
+            "example": "Verification created via the Paysafe API"
+          }
+        }
+      },
+      "NetworkToken": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "COMPLETED",
+              "HELD",
+              "FAILED",
+              "CANCELLED",
+              "PENDING",
+              "PROCESSING"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/BillingDetails"
+          },
+          "description": {
+            "type": "string",
+            "example": "NetworkToken created via the Paysafe API"
+          }
+        }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad request \u2014 a field is missing or malformed.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Authentication failed.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Declined": {
+        "description": "The transaction was declined.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "The resource was not found.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Conflict": {
+        "description": "Duplicate `merchantRefNum`.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "ServerError": {
+        "description": "Unexpected error.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "Limit": {
+        "name": "limit",
+        "in": "query",
+        "schema": {
+          "type": "integer",
+          "default": 10,
+          "maximum": 100
+        },
+        "description": "Number of records to return."
+      },
+      "Offset": {
+        "name": "offset",
+        "in": "query",
+        "schema": {
+          "type": "integer",
+          "default": 0
+        },
+        "description": "Zero-based index of the first record to return."
+      },
+      "MerchantRefNum": {
+        "name": "merchantRefNum",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        },
+        "description": "Filter by your own reference number."
+      }
+    }
+  }
+}

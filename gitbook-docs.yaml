@@ -1,0 +1,78 @@
+# Paysafe Developer Portal — site structure as code.
+#
+# GitBook reconciles this file on every merge to the default branch: sections,
+# spaces and the directory each space reads from are all declared here, so the
+# whole navigation is reviewable in a pull request.
+#
+# WARNING: entries bind by `key`, not by title or path. Changing a live space's
+# `key` REPLACES the space and orphans the old one. Rename via `title`, move a
+# URL via `path`, move source content via `content.directory` — never via `key`.
+
+$schema: https://api.gitbook.com/gitbook-docs.yaml
+
+site:
+  title: Paysafe Developer Portal
+  structure:
+    - type: section
+      key: home
+      title: Home
+      path: home
+      icon: house
+      description: Start here — everything you need to integrate with Paysafe.
+      children:
+        - type: space
+          key: home-space
+          title: Home
+          path: home
+          default: true
+          content:
+            directory: ./home
+            language: en
+
+    - type: section
+      key: apis-sdks
+      title: APIs & SDKs
+      path: apis-and-sdks
+      icon: code
+      description: REST API references, server-side SDKs and client libraries.
+      children:
+        - type: space
+          key: apis-sdks-space
+          title: APIs & SDKs
+          path: apis-and-sdks
+          default: true
+          content:
+            directory: ./apis-and-sdks
+            language: en
+
+    - type: section
+      key: support
+      title: Support & Resources
+      path: support
+      icon: life-ring
+      description: Guides, tutorials and reference information.
+      children:
+        - type: space
+          key: support-space
+          title: Support & Resources
+          path: support
+          default: true
+          content:
+            directory: ./support
+            language: en
+
+    - type: section
+      key: changelog
+      title: Changelog
+      path: changelog
+      icon: clock-rotate-left
+      description: Every documentation and API change, newest first.
+      children:
+        - type: space
+          key: changelog-space
+          title: Changelog
+          path: changelog
+          default: true
+          content:
+            directory: ./changelog
+            language: en

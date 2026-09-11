@@ -1,0 +1,18 @@
+# Cross-space link sentinels.
+#
+# Markdown links that cross a space boundary are written as
+#   https://app.gitbook.com/s/XSPACE_<KEY>/<path>
+# because real space ids do not exist until GitBook creates the spaces on the
+# first Git Sync merge.
+#
+# After that first merge, read the ids back with:
+#   GET /v1/orgs/{orgId}/sites/{siteId}/structure
+# fill them in below, run scripts/resolve-cross-space-links.sh, and push again.
+#
+# This is the documented two-merge rollout for structure-as-code.
+
+spaces:
+  XSPACE_HOME: ""        # home/          — section "Home"
+  XSPACE_APIS: ""        # apis-and-sdks/ — section "APIs & SDKs"
+  XSPACE_SUPPORT: ""     # support/       — section "Support & Resources"
+  XSPACE_CHANGELOG: ""   # changelog/     — section "Changelog"
