@@ -50,8 +50,8 @@
     "/payments": {
       "post": {
         "operationId": "createWalletPayment",
-        "summary": "Create a walletpayment",
-        "description": "Creates a new walletpayment. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "summary": "Create a wallet payment",
+        "description": "Creates a new wallet payment. Supply a unique `merchantRefNum` so the request can be safely retried.",
         "tags": [
           "Wallet payments"
         ],
@@ -98,8 +98,8 @@
       },
       "get": {
         "operationId": "listWalletPayments",
-        "summary": "List payments",
-        "description": "Returns a paginated list of payments, most recent first.",
+        "summary": "List wallet payments",
+        "description": "Returns a paginated list of wallet payments, most recent first.",
         "tags": [
           "Wallet payments"
         ],
@@ -114,7 +114,7 @@
                     "meta": {
                       "$ref": "#/components/schemas/Pagination"
                     },
-                    "walletPayments": {
+                    "payments": {
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/WalletPayment"
@@ -154,8 +154,8 @@
     "/payments/{id}": {
       "get": {
         "operationId": "getWalletPayment",
-        "summary": "Get a walletpayment",
-        "description": "Retrieves a single walletpayment by its Paysafe id.",
+        "summary": "Get a wallet payment",
+        "description": "Retrieves a single wallet payment by its Paysafe id.",
         "tags": [
           "Wallet payments"
         ],
@@ -191,15 +191,15 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the wallet payment.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
       },
       "put": {
         "operationId": "updateWalletPayment",
-        "summary": "Update a walletpayment",
-        "description": "Updates a mutable field on an existing walletpayment.",
+        "summary": "Update a wallet payment",
+        "description": "Updates a mutable field on an existing wallet payment.",
         "tags": [
           "Wallet payments"
         ],
@@ -241,7 +241,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the wallet payment.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -303,7 +303,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the wallet payment.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -365,20 +365,10 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the wallet payment.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WalletPayment"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/payouts": {
@@ -525,7 +515,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the payout.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
@@ -575,7 +565,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the payout.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -637,27 +627,17 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the payout.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Payout"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/customers": {
       "post": {
         "operationId": "createWalletCustomer",
-        "summary": "Create a walletcustomer",
-        "description": "Creates a new walletcustomer. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "summary": "Create a customer",
+        "description": "Creates a new customer.",
         "tags": [
           "Customers"
         ],
@@ -720,7 +700,7 @@
                     "meta": {
                       "$ref": "#/components/schemas/Pagination"
                     },
-                    "walletCustomers": {
+                    "customers": {
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/WalletCustomer"
@@ -760,8 +740,8 @@
     "/customers/{id}": {
       "get": {
         "operationId": "getWalletCustomer",
-        "summary": "Get a walletcustomer",
-        "description": "Retrieves a single walletcustomer by its Paysafe id.",
+        "summary": "Get a customer",
+        "description": "Retrieves a single customer by its Paysafe id.",
         "tags": [
           "Customers"
         ],
@@ -797,15 +777,15 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the customer.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
       },
       "put": {
         "operationId": "updateWalletCustomer",
-        "summary": "Update a walletcustomer",
-        "description": "Updates a mutable field on an existing walletcustomer.",
+        "summary": "Update a customer",
+        "description": "Updates a mutable field on an existing customer.",
         "tags": [
           "Customers"
         ],
@@ -847,7 +827,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the customer.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -867,7 +847,7 @@
       "post": {
         "operationId": "createOnRampQuote",
         "summary": "Create a quote",
-        "description": "Returns an indicative rate and fee breakdown, valid for 60 seconds.",
+        "description": "Creates a new quote.",
         "tags": [
           "Crypto On-Ramp"
         ],
@@ -917,7 +897,7 @@
       "get": {
         "operationId": "getOnRampQuote",
         "summary": "Get a quote",
-        "description": "Retrieves a previously created quote and whether it is still valid.",
+        "description": "Retrieves a single quote by its Paysafe id.",
         "tags": [
           "Crypto On-Ramp"
         ],
@@ -963,7 +943,7 @@
       "post": {
         "operationId": "createOnRampOrder",
         "summary": "Create an order",
-        "description": "Executes a fiat-to-crypto purchase against a live quote.",
+        "description": "Creates a new order. Supply a unique `merchantRefNum` so the request can be safely retried.",
         "tags": [
           "Crypto On-Ramp"
         ],
@@ -1011,7 +991,7 @@
       "get": {
         "operationId": "listOnRampOrders",
         "summary": "List orders",
-        "description": "Returns a paginated list of on-ramp orders.",
+        "description": "Returns a paginated list of orders, most recent first.",
         "tags": [
           "Crypto On-Ramp"
         ],
@@ -1026,7 +1006,7 @@
                     "meta": {
                       "$ref": "#/components/schemas/Pagination"
                     },
-                    "onRampOrders": {
+                    "orders": {
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/OnRampOrder"
@@ -1067,7 +1047,7 @@
       "get": {
         "operationId": "getOnRampOrder",
         "summary": "Get an order",
-        "description": "Retrieves a single on-ramp order.",
+        "description": "Retrieves a single order by its Paysafe id.",
         "tags": [
           "Crypto On-Ramp"
         ],
@@ -1112,8 +1092,8 @@
     "/onramp/assets": {
       "get": {
         "operationId": "listOnRampAssets",
-        "summary": "List supported assets",
-        "description": "Returns the cryptocurrencies available to the customer, by jurisdiction.",
+        "summary": "List assets",
+        "description": "Returns a paginated list of assets, most recent first.",
         "tags": [
           "Crypto On-Ramp"
         ],
@@ -1128,7 +1108,7 @@
                     "meta": {
                       "$ref": "#/components/schemas/Pagination"
                     },
-                    "onRampAssets": {
+                    "assets": {
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/OnRampAsset"

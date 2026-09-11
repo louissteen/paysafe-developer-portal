@@ -63,7 +63,7 @@
       "post": {
         "operationId": "createWallet",
         "summary": "Create a wallet",
-        "description": "Creates a new wallet. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "description": "Creates a new wallet.",
         "tags": [
           "Wallets"
         ],
@@ -203,7 +203,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the wallet.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
@@ -253,7 +253,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the wallet.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -315,20 +315,10 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the wallet.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Wallet"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/wallets/{id}/unfreeze": {
@@ -377,20 +367,10 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the wallet.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Wallet"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/wallets/{id}/close": {
@@ -439,27 +419,17 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the wallet.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Wallet"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/wallets/{walletId}/balances": {
       "post": {
         "operationId": "createBalance",
         "summary": "Create a balance",
-        "description": "Creates a new balance. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "description": "Creates a new balance.",
         "tags": [
           "Balances"
         ],
@@ -518,8 +488,8 @@
       },
       "get": {
         "operationId": "listBalances",
-        "summary": "List wallets/{walletId}/balances",
-        "description": "Returns a paginated list of wallets/{walletId}/balances, most recent first.",
+        "summary": "List balances",
+        "description": "Returns a paginated list of balances, most recent first.",
         "tags": [
           "Balances"
         ],
@@ -631,7 +601,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the balance.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
@@ -691,7 +661,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the balance.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -770,8 +740,8 @@
       },
       "get": {
         "operationId": "listDeposits",
-        "summary": "List wallets/{walletId}/deposits",
-        "description": "Returns a paginated list of wallets/{walletId}/deposits, most recent first.",
+        "summary": "List deposits",
+        "description": "Returns a paginated list of deposits, most recent first.",
         "tags": [
           "Deposits"
         ],
@@ -883,7 +853,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the deposit.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
@@ -943,7 +913,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the deposit.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -1015,20 +985,10 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the deposit.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Deposit"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/wallets/{walletId}/withdrawals": {
@@ -1094,8 +1054,8 @@
       },
       "get": {
         "operationId": "listWithdrawals",
-        "summary": "List wallets/{walletId}/withdrawals",
-        "description": "Returns a paginated list of wallets/{walletId}/withdrawals, most recent first.",
+        "summary": "List withdrawals",
+        "description": "Returns a paginated list of withdrawals, most recent first.",
         "tags": [
           "Withdrawals"
         ],
@@ -1207,7 +1167,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the withdrawal.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
@@ -1267,7 +1227,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the withdrawal.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -1339,20 +1299,10 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the withdrawal.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Withdrawal"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/wallets/{walletId}/transfers": {
@@ -1418,8 +1368,8 @@
       },
       "get": {
         "operationId": "listTransfers",
-        "summary": "List wallets/{walletId}/transfers",
-        "description": "Returns a paginated list of wallets/{walletId}/transfers, most recent first.",
+        "summary": "List transfers",
+        "description": "Returns a paginated list of transfers, most recent first.",
         "tags": [
           "Transfers"
         ],
@@ -1531,7 +1481,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the transfer.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
@@ -1591,7 +1541,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the transfer.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -1611,7 +1561,7 @@
       "get": {
         "operationId": "listWalletTransactions",
         "summary": "List transactions",
-        "description": "Returns a unified, paginated ledger of every movement on the wallet.",
+        "description": "Returns a paginated list of transactions, most recent first.",
         "tags": [
           "Transactions"
         ],
@@ -1677,7 +1627,7 @@
       "get": {
         "operationId": "getWalletTransaction",
         "summary": "Get a transaction",
-        "description": "Retrieves a single ledger entry with its full lifecycle history.",
+        "description": "Retrieves a single transaction by its Paysafe id.",
         "tags": [
           "Transactions"
         ],
@@ -1808,7 +1758,7 @@
                     "meta": {
                       "$ref": "#/components/schemas/Pagination"
                     },
-                    "kycs": {
+                    "kyc": {
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/Kyc"

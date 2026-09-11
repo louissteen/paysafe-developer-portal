@@ -203,7 +203,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the payment.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
@@ -253,7 +253,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the payment.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -315,7 +315,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the payment.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -377,20 +377,10 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the payment.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Payment"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/payments/{id}/cancel": {
@@ -439,20 +429,10 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the payment.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Payment"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/settlements": {
@@ -599,7 +579,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the settlement.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
@@ -649,7 +629,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the settlement.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -711,20 +691,10 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the settlement.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Settlement"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/refunds": {
@@ -871,7 +841,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the refund.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
@@ -921,7 +891,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the refund.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -983,27 +953,17 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the refund.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Refund"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/standalonecredits": {
       "post": {
         "operationId": "createStandaloneCredit",
-        "summary": "Create a standalonecredit",
-        "description": "Creates a new standalonecredit. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "summary": "Create a standalone credit",
+        "description": "Creates a new standalone credit. Supply a unique `merchantRefNum` so the request can be safely retried.",
         "tags": [
           "Standalone credits"
         ],
@@ -1050,8 +1010,8 @@
       },
       "get": {
         "operationId": "listStandaloneCredits",
-        "summary": "List standalonecredits",
-        "description": "Returns a paginated list of standalonecredits, most recent first.",
+        "summary": "List standalone credits",
+        "description": "Returns a paginated list of standalone credits, most recent first.",
         "tags": [
           "Standalone credits"
         ],
@@ -1106,8 +1066,8 @@
     "/standalonecredits/{id}": {
       "get": {
         "operationId": "getStandaloneCredit",
-        "summary": "Get a standalonecredit",
-        "description": "Retrieves a single standalonecredit by its Paysafe id.",
+        "summary": "Get a standalone credit",
+        "description": "Retrieves a single standalone credit by its Paysafe id.",
         "tags": [
           "Standalone credits"
         ],
@@ -1143,15 +1103,15 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the standalone credit.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
       },
       "put": {
         "operationId": "updateStandaloneCredit",
-        "summary": "Update a standalonecredit",
-        "description": "Updates a mutable field on an existing standalonecredit.",
+        "summary": "Update a standalone credit",
+        "description": "Updates a mutable field on an existing standalone credit.",
         "tags": [
           "Standalone credits"
         ],
@@ -1193,7 +1153,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the standalone credit.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -1255,20 +1215,10 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the standalone credit.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/StandaloneCredit"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/verifications": {
@@ -1415,7 +1365,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the verification.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
@@ -1465,7 +1415,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the verification.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -1484,7 +1434,7 @@
     "/orders": {
       "post": {
         "operationId": "createOrder",
-        "summary": "Create a order",
+        "summary": "Create an order",
         "description": "Creates a new order. Supply a unique `merchantRefNum` so the request can be safely retried.",
         "tags": [
           "Orders"
@@ -1588,7 +1538,7 @@
     "/orders/{id}": {
       "get": {
         "operationId": "getOrder",
-        "summary": "Get a order",
+        "summary": "Get an order",
         "description": "Retrieves a single order by its Paysafe id.",
         "tags": [
           "Orders"
@@ -1625,14 +1575,14 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the order.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
       },
       "put": {
         "operationId": "updateOrder",
-        "summary": "Update a order",
+        "summary": "Update an order",
         "description": "Updates a mutable field on an existing order.",
         "tags": [
           "Orders"
@@ -1675,7 +1625,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the order.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -1737,7 +1687,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the order.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -1757,7 +1707,7 @@
       "post": {
         "operationId": "createWebhook",
         "summary": "Create a webhook subscription",
-        "description": "Registers an HTTPS endpoint to receive event notifications.",
+        "description": "Creates a new webhook subscription.",
         "tags": [
           "Webhooks"
         ],
@@ -1805,7 +1755,7 @@
       "get": {
         "operationId": "listWebhooks",
         "summary": "List webhook subscriptions",
-        "description": "Returns every webhook subscription on the account.",
+        "description": "Returns a paginated list of webhook subscriptions, most recent first.",
         "tags": [
           "Webhooks"
         ],
@@ -1861,7 +1811,7 @@
       "get": {
         "operationId": "getWebhook",
         "summary": "Get a webhook subscription",
-        "description": "Retrieves a single webhook subscription.",
+        "description": "Retrieves a single webhook subscription by its Paysafe id.",
         "tags": [
           "Webhooks"
         ],
@@ -1905,7 +1855,7 @@
       "put": {
         "operationId": "updateWebhook",
         "summary": "Update a webhook subscription",
-        "description": "Changes the target URL or the subscribed event types.",
+        "description": "Updates a mutable field on an existing webhook subscription.",
         "tags": [
           "Webhooks"
         ],
@@ -2004,7 +1954,7 @@
       "get": {
         "operationId": "listWebhookDeliveries",
         "summary": "List delivery attempts",
-        "description": "Returns recent delivery attempts with their HTTP status and response body.",
+        "description": "Returns a paginated list of webhook subscriptions, most recent first.",
         "tags": [
           "Webhooks"
         ],
@@ -2019,10 +1969,10 @@
                     "meta": {
                       "$ref": "#/components/schemas/Pagination"
                     },
-                    "webhooks": {
+                    "deliveries": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/Webhook"
+                        "$ref": "#/components/schemas/WebhookDelivery"
                       }
                     }
                   }
@@ -2076,11 +2026,11 @@
         ],
         "responses": {
           "201": {
-            "description": "Success.",
+            "description": "The event was queued for redelivery.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Webhook"
+                  "$ref": "#/components/schemas/WebhookDelivery"
                 }
               }
             }
@@ -2125,17 +2075,7 @@
             "description": "Unique identifier of the delivery.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Webhook"
-              }
-            }
-          }
-        }
+        ]
       }
     }
   },
@@ -2881,6 +2821,53 @@
           "totalItems": {
             "type": "integer",
             "example": 137
+          }
+        }
+      },
+      "WebhookDelivery": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "eventId": {
+            "type": "string",
+            "example": "evt_7f3c1a90"
+          },
+          "eventType": {
+            "type": "string",
+            "example": "PAYMENT_COMPLETED"
+          },
+          "attempt": {
+            "type": "integer",
+            "example": 2
+          },
+          "httpStatus": {
+            "type": "integer",
+            "example": 500,
+            "nullable": true
+          },
+          "responseBody": {
+            "type": "string",
+            "readOnly": true
+          },
+          "deliveredAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "example": "2026-09-11T14:23:05Z"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "DELIVERED",
+              "FAILED",
+              "UNDELIVERABLE"
+            ],
+            "example": "FAILED"
           }
         }
       }

@@ -58,7 +58,7 @@
     "/applications": {
       "post": {
         "operationId": "createApplication",
-        "summary": "Create a application",
+        "summary": "Create an application",
         "description": "Creates a new application. Supply a unique `merchantRefNum` so the request can be safely retried.",
         "tags": [
           "Applications"
@@ -162,7 +162,7 @@
     "/applications/{id}": {
       "get": {
         "operationId": "getApplication",
-        "summary": "Get a application",
+        "summary": "Get an application",
         "description": "Retrieves a single application by its Paysafe id.",
         "tags": [
           "Applications"
@@ -199,14 +199,14 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the application.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
       },
       "put": {
         "operationId": "updateApplication",
-        "summary": "Update a application",
+        "summary": "Update an application",
         "description": "Updates a mutable field on an existing application.",
         "tags": [
           "Applications"
@@ -249,7 +249,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the application.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -311,20 +311,10 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the application.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Application"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/applications/{id}/withdraw": {
@@ -373,27 +363,17 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the application.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Application"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/applications/{applicationId}/businesses": {
       "post": {
         "operationId": "createBusiness",
         "summary": "Create a business",
-        "description": "Creates a new business. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "description": "Creates a new business.",
         "tags": [
           "Businesses"
         ],
@@ -452,8 +432,8 @@
       },
       "get": {
         "operationId": "listBusinesss",
-        "summary": "List applications/{applicationId}/businesses",
-        "description": "Returns a paginated list of applications/{applicationId}/businesses, most recent first.",
+        "summary": "List businesses",
+        "description": "Returns a paginated list of businesses, most recent first.",
         "tags": [
           "Businesses"
         ],
@@ -468,7 +448,7 @@
                     "meta": {
                       "$ref": "#/components/schemas/Pagination"
                     },
-                    "businesss": {
+                    "businesses": {
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/Business"
@@ -565,7 +545,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the business.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
@@ -625,7 +605,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the business.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -644,8 +624,8 @@
     "/applications/{applicationId}/owners": {
       "post": {
         "operationId": "createOwner",
-        "summary": "Create a owner",
-        "description": "Creates a new owner. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "summary": "Create an owner",
+        "description": "Creates a new owner.",
         "tags": [
           "Owners"
         ],
@@ -704,8 +684,8 @@
       },
       "get": {
         "operationId": "listOwners",
-        "summary": "List applications/{applicationId}/owners",
-        "description": "Returns a paginated list of applications/{applicationId}/owners, most recent first.",
+        "summary": "List owners",
+        "description": "Returns a paginated list of owners, most recent first.",
         "tags": [
           "Owners"
         ],
@@ -770,7 +750,7 @@
     "/applications/{applicationId}/owners/{id}": {
       "get": {
         "operationId": "getOwner",
-        "summary": "Get a owner",
+        "summary": "Get an owner",
         "description": "Retrieves a single owner by its Paysafe id.",
         "tags": [
           "Owners"
@@ -817,14 +797,14 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the owner.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
       },
       "put": {
         "operationId": "updateOwner",
-        "summary": "Update a owner",
+        "summary": "Update an owner",
         "description": "Updates a mutable field on an existing owner.",
         "tags": [
           "Owners"
@@ -877,7 +857,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the owner.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -897,7 +877,7 @@
       "post": {
         "operationId": "createDocument",
         "summary": "Create a document",
-        "description": "Creates a new document. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "description": "Creates a new document.",
         "tags": [
           "Documents"
         ],
@@ -956,8 +936,8 @@
       },
       "get": {
         "operationId": "listDocuments",
-        "summary": "List applications/{applicationId}/documents",
-        "description": "Returns a paginated list of applications/{applicationId}/documents, most recent first.",
+        "summary": "List documents",
+        "description": "Returns a paginated list of documents, most recent first.",
         "tags": [
           "Documents"
         ],
@@ -1069,7 +1049,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the document.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
@@ -1129,7 +1109,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the document.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -1201,27 +1181,17 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the document.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Document"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/submerchants": {
       "get": {
         "operationId": "listSubMerchants",
         "summary": "List sub-merchants",
-        "description": "Returns every sub-merchant on the partner account.",
+        "description": "Returns a paginated list of sub-merchants, most recent first.",
         "tags": [
           "Sub-merchants"
         ],
@@ -1277,7 +1247,7 @@
       "get": {
         "operationId": "getSubMerchant",
         "summary": "Get a sub-merchant",
-        "description": "Retrieves a single sub-merchant account.",
+        "description": "Retrieves a single sub-merchant by its Paysafe id.",
         "tags": [
           "Sub-merchants"
         ],
@@ -1321,7 +1291,7 @@
       "put": {
         "operationId": "updateSubMerchant",
         "summary": "Update a sub-merchant",
-        "description": "Updates the settlement or contact configuration of a sub-merchant.",
+        "description": "Updates a mutable field on an existing sub-merchant.",
         "tags": [
           "Sub-merchants"
         ],
@@ -1428,24 +1398,14 @@
             "description": "Unique identifier of the subMerchant.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SubMerchant"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/terminationinquiries": {
       "post": {
         "operationId": "createTerminationInquiry",
         "summary": "Create a termination inquiry",
-        "description": "Screens a business and its owners against Mastercard MATCH Pro and the Visa Terminated Merchant File.",
+        "description": "Creates a new termination inquiry.",
         "tags": [
           "Termination inquiry"
         ],
@@ -1495,7 +1455,7 @@
       "get": {
         "operationId": "getTerminationInquiry",
         "summary": "Get a termination inquiry",
-        "description": "Retrieves the result of a previously submitted inquiry.",
+        "description": "Retrieves a single termination inquiry by its Paysafe id.",
         "tags": [
           "Termination inquiry"
         ],

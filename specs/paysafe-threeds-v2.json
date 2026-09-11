@@ -50,7 +50,7 @@
     "/authentications": {
       "post": {
         "operationId": "createAuthentication",
-        "summary": "Create a authentication",
+        "summary": "Create an authentication",
         "description": "Creates a new authentication. Supply a unique `merchantRefNum` so the request can be safely retried.",
         "tags": [
           "Authentications"
@@ -154,7 +154,7 @@
     "/authentications/{id}": {
       "get": {
         "operationId": "getAuthentication",
-        "summary": "Get a authentication",
+        "summary": "Get an authentication",
         "description": "Retrieves a single authentication by its Paysafe id.",
         "tags": [
           "Authentications"
@@ -191,14 +191,14 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the authentication.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
       },
       "put": {
         "operationId": "updateAuthentication",
-        "summary": "Update a authentication",
+        "summary": "Update an authentication",
         "description": "Updates a mutable field on an existing authentication.",
         "tags": [
           "Authentications"
@@ -241,7 +241,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the authentication.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -303,7 +303,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the authentication.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -365,27 +365,17 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the authentication.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Authentication"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/enrollmentchecks": {
       "post": {
         "operationId": "createEnrollment",
-        "summary": "Create a enrollment",
-        "description": "Creates a new enrollment. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "summary": "Create an enrollment check",
+        "description": "Creates a new enrollment check. Supply a unique `merchantRefNum` so the request can be safely retried.",
         "tags": [
           "Enrollment checks"
         ],
@@ -432,8 +422,8 @@
       },
       "get": {
         "operationId": "listEnrollments",
-        "summary": "List enrollmentchecks",
-        "description": "Returns a paginated list of enrollmentchecks, most recent first.",
+        "summary": "List enrollment checks",
+        "description": "Returns a paginated list of enrollment checks, most recent first.",
         "tags": [
           "Enrollment checks"
         ],
@@ -448,7 +438,7 @@
                     "meta": {
                       "$ref": "#/components/schemas/Pagination"
                     },
-                    "enrollments": {
+                    "enrollmentChecks": {
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/Enrollment"
@@ -488,8 +478,8 @@
     "/enrollmentchecks/{id}": {
       "get": {
         "operationId": "getEnrollment",
-        "summary": "Get a enrollment",
-        "description": "Retrieves a single enrollment by its Paysafe id.",
+        "summary": "Get an enrollment check",
+        "description": "Retrieves a single enrollment check by its Paysafe id.",
         "tags": [
           "Enrollment checks"
         ],
@@ -525,15 +515,15 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the enrollment check.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
       },
       "put": {
         "operationId": "updateEnrollment",
-        "summary": "Update a enrollment",
-        "description": "Updates a mutable field on an existing enrollment.",
+        "summary": "Update an enrollment check",
+        "description": "Updates a mutable field on an existing enrollment check.",
         "tags": [
           "Enrollment checks"
         ],
@@ -575,7 +565,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the enrollment check.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -595,7 +585,7 @@
       "post": {
         "operationId": "createDeviceFingerprint",
         "summary": "Create a device fingerprint",
-        "description": "Starts a device data collection session and returns the URL to load in a hidden iframe.",
+        "description": "Creates a new device fingerprint.",
         "tags": [
           "Device fingerprinting"
         ],
@@ -645,7 +635,7 @@
       "get": {
         "operationId": "getDeviceFingerprint",
         "summary": "Get a device fingerprint",
-        "description": "Retrieves the collected device profile once the browser has completed collection.",
+        "description": "Retrieves a single device fingerprint by its Paysafe id.",
         "tags": [
           "Device fingerprinting"
         ],
@@ -690,8 +680,8 @@
     "/exemptions": {
       "post": {
         "operationId": "createExemption",
-        "summary": "Request an exemption",
-        "description": "Requests a low-value, TRA or trusted-beneficiary exemption from strong customer authentication.",
+        "summary": "Create an exemption",
+        "description": "Creates a new exemption. Supply a unique `merchantRefNum` so the request can be safely retried.",
         "tags": [
           "Exemptions"
         ],
@@ -739,7 +729,7 @@
       "get": {
         "operationId": "listExemptions",
         "summary": "List exemptions",
-        "description": "Returns exemptions requested on the account.",
+        "description": "Returns a paginated list of exemptions, most recent first.",
         "tags": [
           "Exemptions"
         ],
@@ -795,7 +785,7 @@
       "get": {
         "operationId": "getExemption",
         "summary": "Get an exemption",
-        "description": "Retrieves a single exemption request and the issuer's response.",
+        "description": "Retrieves a single exemption by its Paysafe id.",
         "tags": [
           "Exemptions"
         ],

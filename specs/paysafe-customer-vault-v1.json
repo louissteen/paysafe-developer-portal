@@ -63,7 +63,7 @@
       "post": {
         "operationId": "createProfile",
         "summary": "Create a profile",
-        "description": "Creates a new profile. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "description": "Creates a new profile.",
         "tags": [
           "Profiles"
         ],
@@ -126,7 +126,7 @@
                     "meta": {
                       "$ref": "#/components/schemas/Pagination"
                     },
-                    "profile2s": {
+                    "profiles": {
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/Profile2"
@@ -203,7 +203,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the profile.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
@@ -253,7 +253,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the profile.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -272,8 +272,8 @@
     "/profiles/{profileId}/addresses": {
       "post": {
         "operationId": "createAddress",
-        "summary": "Create a address",
-        "description": "Creates a new address. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "summary": "Create an address",
+        "description": "Creates a new address.",
         "tags": [
           "Addresses"
         ],
@@ -332,8 +332,8 @@
       },
       "get": {
         "operationId": "listAddresss",
-        "summary": "List profiles/{profileId}/addresses",
-        "description": "Returns a paginated list of profiles/{profileId}/addresses, most recent first.",
+        "summary": "List addresses",
+        "description": "Returns a paginated list of addresses, most recent first.",
         "tags": [
           "Addresses"
         ],
@@ -348,7 +348,7 @@
                     "meta": {
                       "$ref": "#/components/schemas/Pagination"
                     },
-                    "addresss": {
+                    "addresses": {
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/Address"
@@ -398,7 +398,7 @@
     "/profiles/{profileId}/addresses/{id}": {
       "get": {
         "operationId": "getAddress",
-        "summary": "Get a address",
+        "summary": "Get an address",
         "description": "Retrieves a single address by its Paysafe id.",
         "tags": [
           "Addresses"
@@ -445,14 +445,14 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the address.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
       },
       "put": {
         "operationId": "updateAddress",
-        "summary": "Update a address",
+        "summary": "Update an address",
         "description": "Updates a mutable field on an existing address.",
         "tags": [
           "Addresses"
@@ -505,7 +505,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the address.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -524,8 +524,8 @@
     "/profiles/{profileId}/cards": {
       "post": {
         "operationId": "createVaultCard",
-        "summary": "Create a vaultcard",
-        "description": "Creates a new vaultcard. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "summary": "Create a stored card",
+        "description": "Creates a new stored card.",
         "tags": [
           "Cards"
         ],
@@ -584,8 +584,8 @@
       },
       "get": {
         "operationId": "listVaultCards",
-        "summary": "List profiles/{profileId}/cards",
-        "description": "Returns a paginated list of profiles/{profileId}/cards, most recent first.",
+        "summary": "List stored cards",
+        "description": "Returns a paginated list of stored cards, most recent first.",
         "tags": [
           "Cards"
         ],
@@ -600,7 +600,7 @@
                     "meta": {
                       "$ref": "#/components/schemas/Pagination"
                     },
-                    "vaultCards": {
+                    "cards": {
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/VaultCard"
@@ -650,8 +650,8 @@
     "/profiles/{profileId}/cards/{id}": {
       "get": {
         "operationId": "getVaultCard",
-        "summary": "Get a vaultcard",
-        "description": "Retrieves a single vaultcard by its Paysafe id.",
+        "summary": "Get a stored card",
+        "description": "Retrieves a single stored card by its Paysafe id.",
         "tags": [
           "Cards"
         ],
@@ -697,15 +697,15 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the stored card.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
       },
       "put": {
         "operationId": "updateVaultCard",
-        "summary": "Update a vaultcard",
-        "description": "Updates a mutable field on an existing vaultcard.",
+        "summary": "Update a stored card",
+        "description": "Updates a mutable field on an existing stored card.",
         "tags": [
           "Cards"
         ],
@@ -757,7 +757,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the stored card.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -829,27 +829,17 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the stored card.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/VaultCard"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/profiles/{profileId}/achbankaccounts": {
       "post": {
         "operationId": "createACHBankAccount",
-        "summary": "Create a achbankaccount",
-        "description": "Creates a new achbankaccount. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "summary": "Create an ACH bank account",
+        "description": "Creates a new ACH bank account.",
         "tags": [
           "ACH bank accounts"
         ],
@@ -908,8 +898,8 @@
       },
       "get": {
         "operationId": "listACHBankAccounts",
-        "summary": "List profiles/{profileId}/achbankaccounts",
-        "description": "Returns a paginated list of profiles/{profileId}/achbankaccounts, most recent first.",
+        "summary": "List ACH bank accounts",
+        "description": "Returns a paginated list of ACH bank accounts, most recent first.",
         "tags": [
           "ACH bank accounts"
         ],
@@ -924,7 +914,7 @@
                     "meta": {
                       "$ref": "#/components/schemas/Pagination"
                     },
-                    "aCHBankAccounts": {
+                    "achBankAccounts": {
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ACHBankAccount"
@@ -974,8 +964,8 @@
     "/profiles/{profileId}/achbankaccounts/{id}": {
       "get": {
         "operationId": "getACHBankAccount",
-        "summary": "Get a achbankaccount",
-        "description": "Retrieves a single achbankaccount by its Paysafe id.",
+        "summary": "Get an ACH bank account",
+        "description": "Retrieves a single ACH bank account by its Paysafe id.",
         "tags": [
           "ACH bank accounts"
         ],
@@ -1021,15 +1011,15 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the ACH bank account.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
       },
       "put": {
         "operationId": "updateACHBankAccount",
-        "summary": "Update a achbankaccount",
-        "description": "Updates a mutable field on an existing achbankaccount.",
+        "summary": "Update an ACH bank account",
+        "description": "Updates a mutable field on an existing ACH bank account.",
         "tags": [
           "ACH bank accounts"
         ],
@@ -1081,7 +1071,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the ACH bank account.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -1100,8 +1090,8 @@
     "/profiles/{profileId}/eftbankaccounts": {
       "post": {
         "operationId": "createEFTBankAccount",
-        "summary": "Create a eftbankaccount",
-        "description": "Creates a new eftbankaccount. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "summary": "Create an EFT bank account",
+        "description": "Creates a new EFT bank account.",
         "tags": [
           "EFT bank accounts"
         ],
@@ -1160,8 +1150,8 @@
       },
       "get": {
         "operationId": "listEFTBankAccounts",
-        "summary": "List profiles/{profileId}/eftbankaccounts",
-        "description": "Returns a paginated list of profiles/{profileId}/eftbankaccounts, most recent first.",
+        "summary": "List EFT bank accounts",
+        "description": "Returns a paginated list of EFT bank accounts, most recent first.",
         "tags": [
           "EFT bank accounts"
         ],
@@ -1176,7 +1166,7 @@
                     "meta": {
                       "$ref": "#/components/schemas/Pagination"
                     },
-                    "eFTBankAccounts": {
+                    "eftBankAccounts": {
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/EFTBankAccount"
@@ -1226,8 +1216,8 @@
     "/profiles/{profileId}/eftbankaccounts/{id}": {
       "get": {
         "operationId": "getEFTBankAccount",
-        "summary": "Get a eftbankaccount",
-        "description": "Retrieves a single eftbankaccount by its Paysafe id.",
+        "summary": "Get an EFT bank account",
+        "description": "Retrieves a single EFT bank account by its Paysafe id.",
         "tags": [
           "EFT bank accounts"
         ],
@@ -1273,15 +1263,15 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the EFT bank account.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
       },
       "put": {
         "operationId": "updateEFTBankAccount",
-        "summary": "Update a eftbankaccount",
-        "description": "Updates a mutable field on an existing eftbankaccount.",
+        "summary": "Update an EFT bank account",
+        "description": "Updates a mutable field on an existing EFT bank account.",
         "tags": [
           "EFT bank accounts"
         ],
@@ -1333,7 +1323,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the EFT bank account.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -1352,8 +1342,8 @@
     "/profiles/{profileId}/sepabankaccounts": {
       "post": {
         "operationId": "createSEPABankAccount",
-        "summary": "Create a sepabankaccount",
-        "description": "Creates a new sepabankaccount. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "summary": "Create a SEPA bank account",
+        "description": "Creates a new SEPA bank account.",
         "tags": [
           "SEPA bank accounts"
         ],
@@ -1412,8 +1402,8 @@
       },
       "get": {
         "operationId": "listSEPABankAccounts",
-        "summary": "List profiles/{profileId}/sepabankaccounts",
-        "description": "Returns a paginated list of profiles/{profileId}/sepabankaccounts, most recent first.",
+        "summary": "List SEPA bank accounts",
+        "description": "Returns a paginated list of SEPA bank accounts, most recent first.",
         "tags": [
           "SEPA bank accounts"
         ],
@@ -1428,7 +1418,7 @@
                     "meta": {
                       "$ref": "#/components/schemas/Pagination"
                     },
-                    "sEPABankAccounts": {
+                    "sepaBankAccounts": {
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/SEPABankAccount"
@@ -1478,8 +1468,8 @@
     "/profiles/{profileId}/sepabankaccounts/{id}": {
       "get": {
         "operationId": "getSEPABankAccount",
-        "summary": "Get a sepabankaccount",
-        "description": "Retrieves a single sepabankaccount by its Paysafe id.",
+        "summary": "Get a SEPA bank account",
+        "description": "Retrieves a single SEPA bank account by its Paysafe id.",
         "tags": [
           "SEPA bank accounts"
         ],
@@ -1525,15 +1515,15 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the SEPA bank account.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
       },
       "put": {
         "operationId": "updateSEPABankAccount",
-        "summary": "Update a sepabankaccount",
-        "description": "Updates a mutable field on an existing sepabankaccount.",
+        "summary": "Update a SEPA bank account",
+        "description": "Updates a mutable field on an existing SEPA bank account.",
         "tags": [
           "SEPA bank accounts"
         ],
@@ -1585,7 +1575,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the SEPA bank account.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -1605,7 +1595,7 @@
       "post": {
         "operationId": "createSingleUseToken",
         "summary": "Create a single-use token",
-        "description": "Creates a token that can be used exactly once, within 15 minutes, to create a permanent vault entry.",
+        "description": "Creates a new single-use token.",
         "tags": [
           "Single-use tokens"
         ],
@@ -1655,7 +1645,7 @@
       "get": {
         "operationId": "getSingleUseToken",
         "summary": "Get a single-use token",
-        "description": "Retrieves the status of a single-use token.",
+        "description": "Retrieves a single single-use token by its Paysafe id.",
         "tags": [
           "Single-use tokens"
         ],

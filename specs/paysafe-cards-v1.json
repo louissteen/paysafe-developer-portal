@@ -62,8 +62,8 @@
     "/auths": {
       "post": {
         "operationId": "createAuth",
-        "summary": "Create a auth",
-        "description": "Creates a new auth. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "summary": "Create an authorization",
+        "description": "Creates a new authorization. Supply a unique `merchantRefNum` so the request can be safely retried.",
         "tags": [
           "Authorizations"
         ],
@@ -110,8 +110,8 @@
       },
       "get": {
         "operationId": "listAuths",
-        "summary": "List auths",
-        "description": "Returns a paginated list of auths, most recent first.",
+        "summary": "List authorizations",
+        "description": "Returns a paginated list of authorizations, most recent first.",
         "tags": [
           "Authorizations"
         ],
@@ -166,8 +166,8 @@
     "/auths/{id}": {
       "get": {
         "operationId": "getAuth",
-        "summary": "Get a auth",
-        "description": "Retrieves a single auth by its Paysafe id.",
+        "summary": "Get an authorization",
+        "description": "Retrieves a single authorization by its Paysafe id.",
         "tags": [
           "Authorizations"
         ],
@@ -203,15 +203,15 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the authorization.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
       },
       "put": {
         "operationId": "updateAuth",
-        "summary": "Update a auth",
-        "description": "Updates a mutable field on an existing auth.",
+        "summary": "Update an authorization",
+        "description": "Updates a mutable field on an existing authorization.",
         "tags": [
           "Authorizations"
         ],
@@ -253,7 +253,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the authorization.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -315,7 +315,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the authorization.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -377,20 +377,10 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the authorization.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Auth"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/settlements": {
@@ -537,7 +527,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the settlement.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
@@ -587,7 +577,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the settlement.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -747,7 +737,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the credit.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
@@ -797,7 +787,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the credit.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -816,8 +806,8 @@
     "/voidauths": {
       "post": {
         "operationId": "createVoid",
-        "summary": "Create a void",
-        "description": "Creates a new void. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "summary": "Create a void authorization",
+        "description": "Creates a new void authorization. Supply a unique `merchantRefNum` so the request can be safely retried.",
         "tags": [
           "Void authorizations"
         ],
@@ -864,8 +854,8 @@
       },
       "get": {
         "operationId": "listVoids",
-        "summary": "List voidauths",
-        "description": "Returns a paginated list of voidauths, most recent first.",
+        "summary": "List void authorizations",
+        "description": "Returns a paginated list of void authorizations, most recent first.",
         "tags": [
           "Void authorizations"
         ],
@@ -920,8 +910,8 @@
     "/voidauths/{id}": {
       "get": {
         "operationId": "getVoid",
-        "summary": "Get a void",
-        "description": "Retrieves a single void by its Paysafe id.",
+        "summary": "Get a void authorization",
+        "description": "Retrieves a single void authorization by its Paysafe id.",
         "tags": [
           "Void authorizations"
         ],
@@ -957,15 +947,15 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the void authorization.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
       },
       "put": {
         "operationId": "updateVoid",
-        "summary": "Update a void",
-        "description": "Updates a mutable field on an existing void.",
+        "summary": "Update a void authorization",
+        "description": "Updates a mutable field on an existing void authorization.",
         "tags": [
           "Void authorizations"
         ],
@@ -1007,7 +997,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the void authorization.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -1026,8 +1016,8 @@
     "/originalcredits": {
       "post": {
         "operationId": "createOriginalCredit",
-        "summary": "Create a originalcredit",
-        "description": "Creates a new originalcredit. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "summary": "Create an original credit",
+        "description": "Creates a new original credit. Supply a unique `merchantRefNum` so the request can be safely retried.",
         "tags": [
           "Original credits"
         ],
@@ -1074,8 +1064,8 @@
       },
       "get": {
         "operationId": "listOriginalCredits",
-        "summary": "List originalcredits",
-        "description": "Returns a paginated list of originalcredits, most recent first.",
+        "summary": "List original credits",
+        "description": "Returns a paginated list of original credits, most recent first.",
         "tags": [
           "Original credits"
         ],
@@ -1130,8 +1120,8 @@
     "/originalcredits/{id}": {
       "get": {
         "operationId": "getOriginalCredit",
-        "summary": "Get a originalcredit",
-        "description": "Retrieves a single originalcredit by its Paysafe id.",
+        "summary": "Get an original credit",
+        "description": "Retrieves a single original credit by its Paysafe id.",
         "tags": [
           "Original credits"
         ],
@@ -1167,15 +1157,15 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the original credit.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
       },
       "put": {
         "operationId": "updateOriginalCredit",
-        "summary": "Update a originalcredit",
-        "description": "Updates a mutable field on an existing originalcredit.",
+        "summary": "Update an original credit",
+        "description": "Updates a mutable field on an existing original credit.",
         "tags": [
           "Original credits"
         ],
@@ -1217,7 +1207,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the original credit.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -1279,27 +1269,17 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the original credit.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OriginalCredit"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/verifications": {
       "post": {
         "operationId": "createCardVerification",
-        "summary": "Verify a card",
-        "description": "Performs a zero-dollar authorization to confirm the card is valid and to run AVS and CVV checks.",
+        "summary": "Create a verification",
+        "description": "Creates a new verification. Supply a unique `merchantRefNum` so the request can be safely retried.",
         "tags": [
           "Account verification"
         ],
@@ -1347,7 +1327,7 @@
       "get": {
         "operationId": "listCardVerifications",
         "summary": "List verifications",
-        "description": "Returns a paginated list of verifications.",
+        "description": "Returns a paginated list of verifications, most recent first.",
         "tags": [
           "Account verification"
         ],
@@ -1403,7 +1383,7 @@
       "get": {
         "operationId": "getCardVerification",
         "summary": "Get a verification",
-        "description": "Retrieves a single verification result.",
+        "description": "Retrieves a single verification by its Paysafe id.",
         "tags": [
           "Account verification"
         ],
@@ -1448,8 +1428,8 @@
     "/networktokens": {
       "post": {
         "operationId": "createNetworkToken",
-        "summary": "Provision a network token",
-        "description": "Requests a network token from the card scheme for a stored card.",
+        "summary": "Create a network token",
+        "description": "Creates a new network token.",
         "tags": [
           "Network tokens"
         ],
@@ -1499,7 +1479,7 @@
       "get": {
         "operationId": "getNetworkToken",
         "summary": "Get a network token",
-        "description": "Retrieves the state and metadata of a provisioned network token.",
+        "description": "Retrieves a single network token by its Paysafe id.",
         "tags": [
           "Network tokens"
         ],

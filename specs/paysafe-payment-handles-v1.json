@@ -50,8 +50,8 @@
     "/paymenthandles": {
       "post": {
         "operationId": "createPaymentHandle",
-        "summary": "Create a paymenthandle",
-        "description": "Creates a new paymenthandle. Supply a unique `merchantRefNum` so the request can be safely retried.",
+        "summary": "Create a payment handle",
+        "description": "Creates a new payment handle. Supply a unique `merchantRefNum` so the request can be safely retried.",
         "tags": [
           "Payment handles"
         ],
@@ -98,8 +98,8 @@
       },
       "get": {
         "operationId": "listPaymentHandles",
-        "summary": "List paymenthandles",
-        "description": "Returns a paginated list of paymenthandles, most recent first.",
+        "summary": "List payment handles",
+        "description": "Returns a paginated list of payment handles, most recent first.",
         "tags": [
           "Payment handles"
         ],
@@ -154,8 +154,8 @@
     "/paymenthandles/{id}": {
       "get": {
         "operationId": "getPaymentHandle",
-        "summary": "Get a paymenthandle",
-        "description": "Retrieves a single paymenthandle by its Paysafe id.",
+        "summary": "Get a payment handle",
+        "description": "Retrieves a single payment handle by its Paysafe id.",
         "tags": [
           "Payment handles"
         ],
@@ -191,15 +191,15 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the payment handle.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ]
       },
       "put": {
         "operationId": "updatePaymentHandle",
-        "summary": "Update a paymenthandle",
-        "description": "Updates a mutable field on an existing paymenthandle.",
+        "summary": "Update a payment handle",
+        "description": "Updates a mutable field on an existing payment handle.",
         "tags": [
           "Payment handles"
         ],
@@ -241,7 +241,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the payment handle.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
         ],
@@ -303,20 +303,10 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the payment handle.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PaymentHandle"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/paymenthandles/{id}/refresh": {
@@ -365,20 +355,10 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier of the id.",
+            "description": "Unique identifier of the payment handle.",
             "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
           }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PaymentHandle"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/paymenthandles/{paymentHandleId}/redirect": {
@@ -512,8 +492,8 @@
     "/paymentmethods": {
       "get": {
         "operationId": "listPaymentMethods",
-        "summary": "List available payment methods",
-        "description": "Returns the payment methods enabled on the account, optionally filtered by currency and country.",
+        "summary": "List payment methods",
+        "description": "Returns a paginated list of payment methods, most recent first.",
         "tags": [
           "Payment methods"
         ],
@@ -569,7 +549,7 @@
       "get": {
         "operationId": "getPaymentMethod",
         "summary": "Get a payment method",
-        "description": "Retrieves the configuration and constraints of one payment method.",
+        "description": "Retrieves a single payment method by its Paysafe id.",
         "tags": [
           "Payment methods"
         ],
@@ -615,7 +595,7 @@
       "post": {
         "operationId": "createSimulation",
         "summary": "Create a simulation",
-        "description": "Forces a specific decline code or status on the next transaction in the test environment.",
+        "description": "Creates a new simulation. Supply a unique `merchantRefNum` so the request can be safely retried.",
         "tags": [
           "Simulated responses"
         ],
@@ -663,7 +643,7 @@
       "get": {
         "operationId": "listSimulations",
         "summary": "List simulations",
-        "description": "Returns the active simulations on the test account.",
+        "description": "Returns a paginated list of simulations, most recent first.",
         "tags": [
           "Simulated responses"
         ],
@@ -756,7 +736,7 @@
       "get": {
         "operationId": "getSimulation",
         "summary": "Get a simulation",
-        "description": "Retrieves one active simulation.",
+        "description": "Retrieves a single simulation by its Paysafe id.",
         "tags": [
           "Simulated responses"
         ],
