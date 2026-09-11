@@ -3,7 +3,7 @@
   "info": {
     "title": "Paysafe Embedded Wallets API",
     "version": "1.0.0",
-    "description": "Embed a fully featured digital wallet inside your own application. Customers can add funds, hold balances in multiple currencies, spend and withdraw \u2014 without leaving your product.",
+    "description": "Embed a fully featured digital wallet inside your own application. Customers can add funds, hold balances in multiple currencies, spend and withdraw \u2014 without leaving your product.\n\n---\n\n**DEMO SPECIFICATION \u2014 NOT A REAL PAYSAFE API.** This document was generated for a GitBook proof of concept. The endpoints, schemas and examples are fabricated and describe no live Paysafe system. For the real Paysafe API, see https://developer.paysafe.com.",
     "contact": {
       "name": "Paysafe Developer Support",
       "url": "https://developer.paysafe.com/en/support/"

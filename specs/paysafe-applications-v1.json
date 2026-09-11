@@ -3,7 +3,7 @@
   "info": {
     "title": "Paysafe Applications API",
     "version": "1.0.0",
-    "description": "White-labelled merchant onboarding. Submit applications, track underwriting decisions and manage sub-merchant accounts programmatically, individually or in bulk.",
+    "description": "White-labelled merchant onboarding. Submit applications, track underwriting decisions and manage sub-merchant accounts programmatically, individually or in bulk.\n\n---\n\n**DEMO SPECIFICATION \u2014 NOT A REAL PAYSAFE API.** This document was generated for a GitBook proof of concept. The endpoints, schemas and examples are fabricated and describe no live Paysafe system. For the real Paysafe API, see https://developer.paysafe.com.",
     "contact": {
       "name": "Paysafe Developer Support",
       "url": "https://developer.paysafe.com/en/support/"

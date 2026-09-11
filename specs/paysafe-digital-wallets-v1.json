@@ -3,7 +3,7 @@
   "info": {
     "title": "Paysafe Digital Wallets API",
     "version": "1.0.0",
-    "description": "Accept payments from Skrill and NETELLER digital wallets, and pay out to them. Includes Crypto On-Ramp for fiat-to-crypto purchases.",
+    "description": "Accept payments from Skrill and NETELLER digital wallets, and pay out to them. Includes Crypto On-Ramp for fiat-to-crypto purchases.\n\n---\n\n**DEMO SPECIFICATION \u2014 NOT A REAL PAYSAFE API.** This document was generated for a GitBook proof of concept. The endpoints, schemas and examples are fabricated and describe no live Paysafe system. For the real Paysafe API, see https://developer.paysafe.com.",
     "contact": {
       "name": "Paysafe Developer Support",
       "url": "https://developer.paysafe.com/en/support/"

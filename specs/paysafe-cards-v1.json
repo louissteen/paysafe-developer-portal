@@ -3,7 +3,7 @@
   "info": {
     "title": "Paysafe Cards API",
     "version": "1.0.0",
-    "description": "The Cards API is Paysafe's long-standing card-processing interface. It remains fully supported for existing integrations; new integrations should use the Payments API.",
+    "description": "The Cards API is Paysafe's long-standing card-processing interface. It remains fully supported for existing integrations; new integrations should use the Payments API.\n\n---\n\n**DEMO SPECIFICATION \u2014 NOT A REAL PAYSAFE API.** This document was generated for a GitBook proof of concept. The endpoints, schemas and examples are fabricated and describe no live Paysafe system. For the real Paysafe API, see https://developer.paysafe.com.",
     "contact": {
       "name": "Paysafe Developer Support",
       "url": "https://developer.paysafe.com/en/support/"

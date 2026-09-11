@@ -5,3 +5,6 @@ Thumbs.db
 .idea/
 .vscode/
 node_modules/
+
+# stray scrapes
+*.html

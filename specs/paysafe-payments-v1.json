@@ -3,7 +3,7 @@
   "info": {
     "title": "Paysafe Payments API",
     "version": "1.0.0",
-    "description": "The Payments API is the single REST integration point for accepting card payments, bank transfers, wallets and local payment methods. It supersedes the legacy Cards API for new integrations.",
+    "description": "The Payments API is the single REST integration point for accepting card payments, bank transfers, wallets and local payment methods. It supersedes the legacy Cards API for new integrations.\n\n---\n\n**DEMO SPECIFICATION \u2014 NOT A REAL PAYSAFE API.** This document was generated for a GitBook proof of concept. The endpoints, schemas and examples are fabricated and describe no live Paysafe system. For the real Paysafe API, see https://developer.paysafe.com.",
     "contact": {
       "name": "Paysafe Developer Support",
       "url": "https://developer.paysafe.com/en/support/"
