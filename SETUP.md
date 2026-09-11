@@ -89,12 +89,11 @@ git push
 
 Until this runs, those links point at a non-existent space. Everything else works.
 
-{% hint %}
-Cross-space content references can take 30+ minutes to start resolving, and
-published pages are cached per content revision — so a page rendered before the
-resolver caught up stays stale. If links still look wrong an hour later, make a
-no-op commit touching the affected space directory to force a re-render.
-{% endhint %}
+> **Resolver lag.** Cross-space content references can take 30+ minutes to start
+> resolving, and published pages are cached per content revision — so a page
+> rendered before the resolver caught up stays stale. If links still look wrong an
+> hour later, make a no-op commit touching the affected space directory to force a
+> re-render.
 
 ---
 

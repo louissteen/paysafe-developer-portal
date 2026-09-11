@@ -214,57 +214,13 @@ Drop-in libraries for the languages and platforms most Paysafe integrations are 
 
 The five most recent documentation and API changes. The [full changelog](https://app.gitbook.com/s/XSPACE_CHANGELOG/) goes back to March 2025 and is filterable by product.
 
-{% table %}
----
-
-**Date**
-
-**Change**
-
-**Area**
-
----
-
-August 2026
-
-Shopify payment method extension documentation for Skrill, PaysafeCash, PaysafeCard and BLIK
-
-Shopping carts
-
----
-
-July 2026
-
-PHP SDK documentation expanded — local payment methods, webhooks, logging, OpenAPI-led model generation
-
-SDKs
-
----
-
-June 2026
-
-Cardinal SDK breaking change in the Android SDK: observer initialization now required
-
-Mobile SDKs
-
----
-
-May 2026
-
-Pay with Crypto launched; BLIK and ePay added via Skrill Quick Checkout
-
-Payment methods
-
----
-
-April 2026
-
-Google Pay Payouts, Merchant Termination Inquiry API and Apple Pay Recurring Payments
-
-Payments API
-
----
-{% endtable %}
+| Date | Change | Area |
+|---|---|---|
+| August 2026 | Shopify payment method extension for Skrill, PaysafeCash, PaysafeCard and BLIK | Shopping carts |
+| July 2026 | PHP SDK documentation expanded — local payment methods, webhooks, logging | SDKs |
+| June 2026 | **Breaking:** Android SDK now requires `initializeObserver` before tokenization | Mobile SDKs |
+| May 2026 | Pay with Crypto launched; BLIK and ePay added via Skrill Quick Checkout | Payment methods |
+| April 2026 | Google Pay Payouts, Merchant Termination Inquiry API, Apple Pay Recurring | Payments API |
 
 ***
 
