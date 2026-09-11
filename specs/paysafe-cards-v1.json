@@ -143,14 +143,8 @@
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
-          "402": {
-            "$ref": "#/components/responses/Declined"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
-          },
-          "409": {
-            "$ref": "#/components/responses/Conflict"
           },
           "500": {
             "$ref": "#/components/responses/ServerError"
@@ -194,14 +188,8 @@
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
-          "402": {
-            "$ref": "#/components/responses/Declined"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
-          },
-          "409": {
-            "$ref": "#/components/responses/Conflict"
           },
           "500": {
             "$ref": "#/components/responses/ServerError"
@@ -489,14 +477,8 @@
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
-          "402": {
-            "$ref": "#/components/responses/Declined"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
-          },
-          "409": {
-            "$ref": "#/components/responses/Conflict"
           },
           "500": {
             "$ref": "#/components/responses/ServerError"
@@ -540,14 +522,8 @@
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
-          "402": {
-            "$ref": "#/components/responses/Declined"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
-          },
-          "409": {
-            "$ref": "#/components/responses/Conflict"
           },
           "500": {
             "$ref": "#/components/responses/ServerError"
@@ -711,14 +687,8 @@
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
-          "402": {
-            "$ref": "#/components/responses/Declined"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
-          },
-          "409": {
-            "$ref": "#/components/responses/Conflict"
           },
           "500": {
             "$ref": "#/components/responses/ServerError"
@@ -762,14 +732,8 @@
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
-          "402": {
-            "$ref": "#/components/responses/Declined"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
-          },
-          "409": {
-            "$ref": "#/components/responses/Conflict"
           },
           "500": {
             "$ref": "#/components/responses/ServerError"
@@ -933,14 +897,8 @@
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
-          "402": {
-            "$ref": "#/components/responses/Declined"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
-          },
-          "409": {
-            "$ref": "#/components/responses/Conflict"
           },
           "500": {
             "$ref": "#/components/responses/ServerError"
@@ -984,14 +942,8 @@
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
-          "402": {
-            "$ref": "#/components/responses/Declined"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
-          },
-          "409": {
-            "$ref": "#/components/responses/Conflict"
           },
           "500": {
             "$ref": "#/components/responses/ServerError"
@@ -1155,14 +1107,8 @@
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
-          "402": {
-            "$ref": "#/components/responses/Declined"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
-          },
-          "409": {
-            "$ref": "#/components/responses/Conflict"
           },
           "500": {
             "$ref": "#/components/responses/ServerError"
@@ -1206,14 +1152,8 @@
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
-          "402": {
-            "$ref": "#/components/responses/Declined"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
-          },
-          "409": {
-            "$ref": "#/components/responses/Conflict"
           },
           "500": {
             "$ref": "#/components/responses/ServerError"
@@ -1439,14 +1379,8 @@
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
-          "402": {
-            "$ref": "#/components/responses/Declined"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
-          },
-          "409": {
-            "$ref": "#/components/responses/Conflict"
           },
           "500": {
             "$ref": "#/components/responses/ServerError"
@@ -1490,14 +1424,8 @@
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
-          "402": {
-            "$ref": "#/components/responses/Declined"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
-          },
-          "409": {
-            "$ref": "#/components/responses/Conflict"
           },
           "500": {
             "$ref": "#/components/responses/ServerError"
@@ -1592,14 +1520,8 @@
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
-          "402": {
-            "$ref": "#/components/responses/Declined"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
-          },
-          "409": {
-            "$ref": "#/components/responses/Conflict"
           },
           "500": {
             "$ref": "#/components/responses/ServerError"
@@ -1635,14 +1557,8 @@
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
-          "402": {
-            "$ref": "#/components/responses/Declined"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
-          },
-          "409": {
-            "$ref": "#/components/responses/Conflict"
           },
           "500": {
             "$ref": "#/components/responses/ServerError"
@@ -1672,6 +1588,588 @@
       }
     },
     "schemas": {
+      "Auth": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90",
+            "maxLength": 255,
+            "description": "Your own unique reference. Reuse it on a retry to avoid a double charge."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "PENDING",
+              "PROCESSING",
+              "HELD",
+              "COMPLETED",
+              "FAILED",
+              "CANCELLED"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "example": "2026-09-11T14:23:05Z"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/BillingDetails"
+          },
+          "settleWithAuth": {
+            "type": "boolean",
+            "default": false
+          },
+          "authCode": {
+            "type": "string",
+            "example": "123456",
+            "readOnly": true
+          },
+          "availableToSettle": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "avsResponse": {
+            "$ref": "#/components/schemas/AvsResponse"
+          },
+          "cvvVerification": {
+            "$ref": "#/components/schemas/CvvVerification"
+          }
+        }
+      },
+      "Amount": {
+        "type": "integer",
+        "format": "int64",
+        "minimum": 1,
+        "example": 4999,
+        "description": "Amount in the currency's **minor unit**. 4999 is $49.99. See Currency codes for each currency's exponent."
+      },
+      "CurrencyCode": {
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 3,
+        "example": "USD",
+        "description": "ISO 4217 currency code."
+      },
+      "BillingDetails": {
+        "type": "object",
+        "properties": {
+          "street": {
+            "type": "string",
+            "example": "100 Queen Street West"
+          },
+          "street2": {
+            "type": "string",
+            "example": "Suite 3200"
+          },
+          "city": {
+            "type": "string",
+            "example": "Toronto"
+          },
+          "state": {
+            "type": "string",
+            "example": "ON",
+            "description": "ISO 3166-2 subdivision code for US and CA addresses."
+          },
+          "country": {
+            "$ref": "#/components/schemas/CountryCode"
+          },
+          "zip": {
+            "type": "string",
+            "example": "M5H 2N2"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+1-416-555-0143"
+          }
+        }
+      },
+      "CountryCode": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 2,
+        "example": "CA",
+        "description": "ISO 3166-1 alpha-2, uppercase. `GB`, never `UK`."
+      },
+      "Card": {
+        "type": "object",
+        "properties": {
+          "cardNum": {
+            "type": "string",
+            "example": "4111111111111111",
+            "writeOnly": true,
+            "description": "Full card number. Only accepted server-side at SAQ D; prefer a payment handle."
+          },
+          "lastDigits": {
+            "type": "string",
+            "example": "1111",
+            "readOnly": true
+          },
+          "cardBin": {
+            "type": "string",
+            "example": "411111",
+            "readOnly": true
+          },
+          "cardExpiry": {
+            "type": "object",
+            "properties": {
+              "month": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 12,
+                "example": 11
+              },
+              "year": {
+                "type": "integer",
+                "example": 2029
+              }
+            }
+          },
+          "cvv": {
+            "type": "string",
+            "writeOnly": true,
+            "example": "123"
+          },
+          "holderName": {
+            "type": "string",
+            "example": "Jane Ellery"
+          },
+          "cardType": {
+            "type": "string",
+            "enum": [
+              "VI",
+              "MC",
+              "AM",
+              "DI",
+              "JC",
+              "MD",
+              "SO",
+              "DC"
+            ],
+            "example": "VI"
+          }
+        }
+      },
+      "CvvVerification": {
+        "type": "string",
+        "enum": [
+          "MATCH",
+          "NO_MATCH",
+          "NOT_PROCESSED",
+          "UNKNOWN"
+        ],
+        "example": "MATCH",
+        "readOnly": true
+      },
+      "Links": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "rel": {
+              "type": "string",
+              "example": "self"
+            },
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "readOnly": true
+      },
+      "AvsResponse": {
+        "type": "string",
+        "enum": [
+          "MATCH",
+          "MATCH_ADDRESS_ONLY",
+          "MATCH_ZIP_ONLY",
+          "NO_MATCH",
+          "NOT_PROCESSED",
+          "UNKNOWN"
+        ],
+        "example": "MATCH",
+        "readOnly": true,
+        "description": "See the AVS guide for how to weight each result."
+      },
+      "Credit": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90",
+            "maxLength": 255,
+            "description": "Your own unique reference. Reuse it on a retry to avoid a double charge."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "PENDING",
+              "PROCESSING",
+              "HELD",
+              "COMPLETED",
+              "FAILED",
+              "CANCELLED"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "example": "2026-09-11T14:23:05Z"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "settlementId": {
+            "type": "string",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        }
+      },
+      "NetworkToken": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "cardId": {
+            "type": "string",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "SUSPENDED",
+              "DELETED",
+              "PENDING"
+            ],
+            "example": "ACTIVE"
+          },
+          "bin": {
+            "type": "string",
+            "example": "411111",
+            "readOnly": true
+          },
+          "lastDigits": {
+            "type": "string",
+            "example": "1111",
+            "readOnly": true
+          },
+          "expiry": {
+            "type": "object",
+            "properties": {
+              "month": {
+                "type": "integer",
+                "example": 11
+              },
+              "year": {
+                "type": "integer",
+                "example": 2029
+              }
+            }
+          },
+          "tokenRequestorId": {
+            "type": "string",
+            "example": "40010030273",
+            "readOnly": true
+          },
+          "provisionedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "example": "2026-09-11T14:23:05Z"
+          }
+        }
+      },
+      "OriginalCredit": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90",
+            "maxLength": 255,
+            "description": "Your own unique reference. Reuse it on a retry to avoid a double charge."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "PENDING",
+              "PROCESSING",
+              "HELD",
+              "COMPLETED",
+              "FAILED",
+              "CANCELLED"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "example": "2026-09-11T14:23:05Z"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          }
+        }
+      },
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "Jane"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Ellery"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "jane.ellery@example.com"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+1-416-555-0143"
+          },
+          "dateOfBirth": {
+            "type": "object",
+            "properties": {
+              "day": {
+                "type": "integer",
+                "example": 14
+              },
+              "month": {
+                "type": "integer",
+                "example": 3
+              },
+              "year": {
+                "type": "integer",
+                "example": 1987
+              }
+            }
+          }
+        }
+      },
+      "Settlement": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90",
+            "maxLength": 255,
+            "description": "Your own unique reference. Reuse it on a retry to avoid a double charge."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "PENDING",
+              "PROCESSING",
+              "HELD",
+              "COMPLETED",
+              "FAILED",
+              "CANCELLED"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "example": "2026-09-11T14:23:05Z"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "paymentId": {
+            "type": "string",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "availableToRefund": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date",
+            "readOnly": true
+          }
+        }
+      },
+      "Verification": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90",
+            "maxLength": 255,
+            "description": "Your own unique reference. Reuse it on a retry to avoid a double charge."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "PENDING",
+              "PROCESSING",
+              "HELD",
+              "COMPLETED",
+              "FAILED",
+              "CANCELLED"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "example": "2026-09-11T14:23:05Z"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/BillingDetails"
+          },
+          "avsResponse": {
+            "$ref": "#/components/schemas/AvsResponse"
+          },
+          "cvvVerification": {
+            "$ref": "#/components/schemas/CvvVerification"
+          },
+          "description": {
+            "type": "string",
+            "example": "Zero-dollar card check"
+          }
+        }
+      },
+      "VoidAuth": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          },
+          "merchantRefNum": {
+            "type": "string",
+            "example": "ref-5f2c1a90",
+            "maxLength": 255,
+            "description": "Your own unique reference. Reuse it on a retry to avoid a double charge."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "PENDING",
+              "PROCESSING",
+              "HELD",
+              "COMPLETED",
+              "FAILED",
+              "CANCELLED"
+            ],
+            "example": "COMPLETED"
+          },
+          "txnTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "example": "2026-09-11T14:23:05Z"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "currencyCode": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "authId": {
+            "type": "string",
+            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
+          }
+        }
+      },
       "Error": {
         "type": "object",
         "properties": {
@@ -1680,7 +2178,8 @@
             "properties": {
               "code": {
                 "type": "string",
-                "example": "5068"
+                "example": "5068",
+                "description": "Stable machine-readable code. Branch on this, not on `message`."
               },
               "message": {
                 "type": "string",
@@ -1712,171 +2211,6 @@
           }
         }
       },
-      "Amount": {
-        "type": "integer",
-        "format": "int64",
-        "minimum": 1,
-        "description": "Amount in the currency's minor unit (see Currency codes).",
-        "example": 4999
-      },
-      "CurrencyCode": {
-        "type": "string",
-        "minLength": 3,
-        "maxLength": 3,
-        "example": "USD"
-      },
-      "BillingDetails": {
-        "type": "object",
-        "properties": {
-          "street": {
-            "type": "string",
-            "example": "100 Queen Street West"
-          },
-          "street2": {
-            "type": "string",
-            "example": "Suite 3200"
-          },
-          "city": {
-            "type": "string",
-            "example": "Toronto"
-          },
-          "state": {
-            "type": "string",
-            "example": "ON"
-          },
-          "country": {
-            "type": "string",
-            "example": "CA"
-          },
-          "zip": {
-            "type": "string",
-            "example": "M5H 2N2"
-          },
-          "phone": {
-            "type": "string",
-            "example": "+1-416-555-0143"
-          }
-        }
-      },
-      "Card": {
-        "type": "object",
-        "properties": {
-          "cardNum": {
-            "type": "string",
-            "example": "4111111111111111"
-          },
-          "lastDigits": {
-            "type": "string",
-            "readOnly": true,
-            "example": "1111"
-          },
-          "cardBin": {
-            "type": "string",
-            "readOnly": true,
-            "example": "411111"
-          },
-          "cardExpiry": {
-            "type": "object",
-            "properties": {
-              "month": {
-                "type": "integer",
-                "example": 11
-              },
-              "year": {
-                "type": "integer",
-                "example": 2029
-              }
-            }
-          },
-          "cvv": {
-            "type": "string",
-            "writeOnly": true,
-            "example": "123"
-          },
-          "holderName": {
-            "type": "string",
-            "example": "Jane Ellery"
-          },
-          "cardType": {
-            "type": "string",
-            "enum": [
-              "VI",
-              "MC",
-              "AM",
-              "DI",
-              "JC",
-              "MD",
-              "SO",
-              "DC"
-            ],
-            "example": "VI"
-          },
-          "networkToken": {
-            "type": "object",
-            "properties": {
-              "bin": {
-                "type": "string"
-              },
-              "lastDigits": {
-                "type": "string"
-              }
-            }
-          }
-        }
-      },
-      "Profile": {
-        "type": "object",
-        "properties": {
-          "firstName": {
-            "type": "string",
-            "example": "Jane"
-          },
-          "lastName": {
-            "type": "string",
-            "example": "Ellery"
-          },
-          "email": {
-            "type": "string",
-            "format": "email",
-            "example": "jane.ellery@example.com"
-          },
-          "phone": {
-            "type": "string",
-            "example": "+1-416-555-0143"
-          },
-          "dateOfBirth": {
-            "type": "object",
-            "properties": {
-              "day": {
-                "type": "integer"
-              },
-              "month": {
-                "type": "integer"
-              },
-              "year": {
-                "type": "integer"
-              }
-            }
-          }
-        }
-      },
-      "Links": {
-        "type": "array",
-        "readOnly": true,
-        "items": {
-          "type": "object",
-          "properties": {
-            "rel": {
-              "type": "string",
-              "example": "self"
-            },
-            "href": {
-              "type": "string",
-              "format": "uri"
-            }
-          }
-        }
-      },
       "Pagination": {
         "type": "object",
         "properties": {
@@ -1891,384 +2225,6 @@
           "totalItems": {
             "type": "integer",
             "example": 137
-          }
-        }
-      },
-      "Auth": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "readOnly": true,
-            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
-          },
-          "merchantRefNum": {
-            "type": "string",
-            "example": "ref-5f2c1a90"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "RECEIVED",
-              "COMPLETED",
-              "HELD",
-              "FAILED",
-              "CANCELLED",
-              "PENDING",
-              "PROCESSING"
-            ],
-            "example": "COMPLETED"
-          },
-          "txnTime": {
-            "type": "string",
-            "format": "date-time",
-            "readOnly": true
-          },
-          "links": {
-            "$ref": "#/components/schemas/Links"
-          },
-          "amount": {
-            "$ref": "#/components/schemas/Amount"
-          },
-          "currencyCode": {
-            "$ref": "#/components/schemas/CurrencyCode"
-          },
-          "card": {
-            "$ref": "#/components/schemas/Card"
-          },
-          "profile": {
-            "$ref": "#/components/schemas/Profile"
-          },
-          "billingDetails": {
-            "$ref": "#/components/schemas/BillingDetails"
-          },
-          "description": {
-            "type": "string",
-            "example": "Auth created via the Paysafe API"
-          }
-        }
-      },
-      "Settlement": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "readOnly": true,
-            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
-          },
-          "merchantRefNum": {
-            "type": "string",
-            "example": "ref-5f2c1a90"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "RECEIVED",
-              "COMPLETED",
-              "HELD",
-              "FAILED",
-              "CANCELLED",
-              "PENDING",
-              "PROCESSING"
-            ],
-            "example": "COMPLETED"
-          },
-          "txnTime": {
-            "type": "string",
-            "format": "date-time",
-            "readOnly": true
-          },
-          "links": {
-            "$ref": "#/components/schemas/Links"
-          },
-          "amount": {
-            "$ref": "#/components/schemas/Amount"
-          },
-          "currencyCode": {
-            "$ref": "#/components/schemas/CurrencyCode"
-          },
-          "card": {
-            "$ref": "#/components/schemas/Card"
-          },
-          "profile": {
-            "$ref": "#/components/schemas/Profile"
-          },
-          "billingDetails": {
-            "$ref": "#/components/schemas/BillingDetails"
-          },
-          "description": {
-            "type": "string",
-            "example": "Settlement created via the Paysafe API"
-          }
-        }
-      },
-      "Credit": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "readOnly": true,
-            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
-          },
-          "merchantRefNum": {
-            "type": "string",
-            "example": "ref-5f2c1a90"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "RECEIVED",
-              "COMPLETED",
-              "HELD",
-              "FAILED",
-              "CANCELLED",
-              "PENDING",
-              "PROCESSING"
-            ],
-            "example": "COMPLETED"
-          },
-          "txnTime": {
-            "type": "string",
-            "format": "date-time",
-            "readOnly": true
-          },
-          "links": {
-            "$ref": "#/components/schemas/Links"
-          },
-          "amount": {
-            "$ref": "#/components/schemas/Amount"
-          },
-          "currencyCode": {
-            "$ref": "#/components/schemas/CurrencyCode"
-          },
-          "card": {
-            "$ref": "#/components/schemas/Card"
-          },
-          "profile": {
-            "$ref": "#/components/schemas/Profile"
-          },
-          "billingDetails": {
-            "$ref": "#/components/schemas/BillingDetails"
-          },
-          "description": {
-            "type": "string",
-            "example": "Credit created via the Paysafe API"
-          }
-        }
-      },
-      "VoidAuth": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "readOnly": true,
-            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
-          },
-          "merchantRefNum": {
-            "type": "string",
-            "example": "ref-5f2c1a90"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "RECEIVED",
-              "COMPLETED",
-              "HELD",
-              "FAILED",
-              "CANCELLED",
-              "PENDING",
-              "PROCESSING"
-            ],
-            "example": "COMPLETED"
-          },
-          "txnTime": {
-            "type": "string",
-            "format": "date-time",
-            "readOnly": true
-          },
-          "links": {
-            "$ref": "#/components/schemas/Links"
-          },
-          "amount": {
-            "$ref": "#/components/schemas/Amount"
-          },
-          "currencyCode": {
-            "$ref": "#/components/schemas/CurrencyCode"
-          },
-          "card": {
-            "$ref": "#/components/schemas/Card"
-          },
-          "profile": {
-            "$ref": "#/components/schemas/Profile"
-          },
-          "billingDetails": {
-            "$ref": "#/components/schemas/BillingDetails"
-          },
-          "description": {
-            "type": "string",
-            "example": "VoidAuth created via the Paysafe API"
-          }
-        }
-      },
-      "OriginalCredit": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "readOnly": true,
-            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
-          },
-          "merchantRefNum": {
-            "type": "string",
-            "example": "ref-5f2c1a90"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "RECEIVED",
-              "COMPLETED",
-              "HELD",
-              "FAILED",
-              "CANCELLED",
-              "PENDING",
-              "PROCESSING"
-            ],
-            "example": "COMPLETED"
-          },
-          "txnTime": {
-            "type": "string",
-            "format": "date-time",
-            "readOnly": true
-          },
-          "links": {
-            "$ref": "#/components/schemas/Links"
-          },
-          "amount": {
-            "$ref": "#/components/schemas/Amount"
-          },
-          "currencyCode": {
-            "$ref": "#/components/schemas/CurrencyCode"
-          },
-          "card": {
-            "$ref": "#/components/schemas/Card"
-          },
-          "profile": {
-            "$ref": "#/components/schemas/Profile"
-          },
-          "billingDetails": {
-            "$ref": "#/components/schemas/BillingDetails"
-          },
-          "description": {
-            "type": "string",
-            "example": "OriginalCredit created via the Paysafe API"
-          }
-        }
-      },
-      "Verification": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "readOnly": true,
-            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
-          },
-          "merchantRefNum": {
-            "type": "string",
-            "example": "ref-5f2c1a90"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "RECEIVED",
-              "COMPLETED",
-              "HELD",
-              "FAILED",
-              "CANCELLED",
-              "PENDING",
-              "PROCESSING"
-            ],
-            "example": "COMPLETED"
-          },
-          "txnTime": {
-            "type": "string",
-            "format": "date-time",
-            "readOnly": true
-          },
-          "links": {
-            "$ref": "#/components/schemas/Links"
-          },
-          "amount": {
-            "$ref": "#/components/schemas/Amount"
-          },
-          "currencyCode": {
-            "$ref": "#/components/schemas/CurrencyCode"
-          },
-          "card": {
-            "$ref": "#/components/schemas/Card"
-          },
-          "profile": {
-            "$ref": "#/components/schemas/Profile"
-          },
-          "billingDetails": {
-            "$ref": "#/components/schemas/BillingDetails"
-          },
-          "description": {
-            "type": "string",
-            "example": "Verification created via the Paysafe API"
-          }
-        }
-      },
-      "NetworkToken": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "readOnly": true,
-            "example": "8a8195ea-7b0f-4d23-9d4b-2c3f6e1a9b44"
-          },
-          "merchantRefNum": {
-            "type": "string",
-            "example": "ref-5f2c1a90"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "RECEIVED",
-              "COMPLETED",
-              "HELD",
-              "FAILED",
-              "CANCELLED",
-              "PENDING",
-              "PROCESSING"
-            ],
-            "example": "COMPLETED"
-          },
-          "txnTime": {
-            "type": "string",
-            "format": "date-time",
-            "readOnly": true
-          },
-          "links": {
-            "$ref": "#/components/schemas/Links"
-          },
-          "amount": {
-            "$ref": "#/components/schemas/Amount"
-          },
-          "currencyCode": {
-            "$ref": "#/components/schemas/CurrencyCode"
-          },
-          "card": {
-            "$ref": "#/components/schemas/Card"
-          },
-          "profile": {
-            "$ref": "#/components/schemas/Profile"
-          },
-          "billingDetails": {
-            "$ref": "#/components/schemas/BillingDetails"
-          },
-          "description": {
-            "type": "string",
-            "example": "NetworkToken created via the Paysafe API"
           }
         }
       }
