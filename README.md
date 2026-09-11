@@ -39,15 +39,24 @@ by tag, at render time.
 | `paysafe-payment-handles-v1` | 14 |
 | **Total** | **200** |
 
-To publish a spec change:
+Each spec is registered with GitBook **by URL**, pointing at this repository's
+`raw.githubusercontent.com` path on `main`. GitBook re-fetches every 6 hours, so a
+merge to `main` is the whole publishing step — there is nothing to upload.
+
+To force an immediate refresh instead of waiting:
 
 ```bash
-gitbook openapi publish --spec paysafe-payments-v1 \
-  --organization <organizationId> specs/paysafe-payments-v1.json
+scripts/publish-specs.sh
 ```
 
-In production this runs from CI on every merge that touches `specs/`, so the reference
-can never drift from the API.
+In CI that runs on every merge touching `specs/`, so the 200-endpoint reference
+cannot drift from the specs.
+
+> **This repository is public** because GitBook has to be able to fetch the specs
+> over plain HTTPS. Nothing here is confidential: the specs are fabricated and the
+> prose is reproduced from Paysafe's own public documentation. If it is ever made
+> private again, spec refreshes will start failing — switch those registrations to
+> direct upload at that point.
 
 ## Editing
 

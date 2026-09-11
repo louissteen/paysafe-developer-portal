@@ -105,17 +105,36 @@ The site is created but **not yet published**. Once the content looks right:
 
 ---
 
-## Re-publishing the OpenAPI specs
+## The OpenAPI specs — already done
 
-The eight specs are registered at organization level, not read from the repo.
-After changing anything in `specs/`, re-register:
+All 8 specs are registered and processed (`complete`, zero errors). They are
+registered **by URL** against this repository, so GitBook re-fetches them every
+6 hours on its own.
+
+| Spec | Operations |
+|---|---|
+| `paysafe-payments-v1` | 38 |
+| `paysafe-embedded-wallets-v1` | 30 |
+| `paysafe-cards-v1` | 29 |
+| `paysafe-customer-vault-v1` | 27 |
+| `paysafe-applications-v1` | 25 |
+| `paysafe-digital-wallets-v1` | 21 |
+| `paysafe-threeds-v2` | 16 |
+| `paysafe-payment-handles-v1` | 14 |
+| **Total** | **200** |
+
+Changing a spec means merging to `main` and waiting, or forcing a refresh:
 
 ```bash
 scripts/publish-specs.sh
 ```
 
-In production this belongs in CI, on every merge that touches `specs/` — that is
-what makes the 200-endpoint reference impossible to drift.
+Manage them at
+https://app.gitbook.com/o/kqsYHgfyM6lAFN5jPss0/openapi
+
+> **The repository must stay public** for URL-based refresh to keep working.
+> Making it private again will not break what is already rendered — GitBook keeps
+> the last good version — but future refreshes will silently stop.
 
 ---
 
