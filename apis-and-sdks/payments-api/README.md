@@ -7,7 +7,7 @@ icon: credit-card
 
 # Payments API
 
-**Base path** `/paymenthub/v1` · **38 endpoints** · [Download the spec](https://app.gitbook.com/s/XSPACE_APIS/payments-api/)
+**Base path** `/paymenthub/v1` · **38 endpoints** · [Download the spec](https://app.gitbook.com/s/YjnAGVmcGiEiZme2Neu4/payments-api/)
 
 The Payments API is the single integration point for every payment method Paysafe supports — cards, bank transfers, digital wallets and cash vouchers. It replaces the older [Cards API](../cards-api/) for new integrations.
 
@@ -61,7 +61,7 @@ Hold funds now, capture on dispatch with `POST /payments/{id}/settle`. Authoriza
 
 ## Common tasks
 
-<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Take a payment</strong></td><td>The ten-minute path from credentials to an approval.</td><td><a href="../getting-started/quickstart.md">Quickstart</a></td></tr><tr><td><strong>Tokenize an instrument</strong></td><td>Create the payment handle that a payment consumes.</td><td><a href="../payment-handles-api/">Payment Handles API</a></td></tr><tr><td><strong>React to events</strong></td><td>Subscribe to webhooks rather than polling.</td><td><a href="https://app.gitbook.com/s/XSPACE_SUPPORT/tutorials/handling-webhooks.md">Handling webhooks</a></td></tr><tr><td><strong>Bill on a schedule</strong></td><td>Store a card and charge it again later.</td><td><a href="https://app.gitbook.com/s/XSPACE_SUPPORT/tutorials/recurring-payments.md">Recurring payments</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Take a payment</strong></td><td>The ten-minute path from credentials to an approval.</td><td><a href="../getting-started/quickstart.md">Quickstart</a></td></tr><tr><td><strong>Tokenize an instrument</strong></td><td>Create the payment handle that a payment consumes.</td><td><a href="../payment-handles-api/">Payment Handles API</a></td></tr><tr><td><strong>React to events</strong></td><td>Subscribe to webhooks rather than polling.</td><td><a href="https://app.gitbook.com/s/s32UcT9FwtQGR4UN7RvJ/tutorials/handling-webhooks.md">Handling webhooks</a></td></tr><tr><td><strong>Bill on a schedule</strong></td><td>Store a card and charge it again later.</td><td><a href="https://app.gitbook.com/s/s32UcT9FwtQGR4UN7RvJ/tutorials/recurring-payments.md">Recurring payments</a></td></tr></tbody></table>
 
 {% hint style="info" %}
 Every endpoint page below is generated from `paysafe-payments-v1` and carries a live request panel. Fill in test credentials and send a real sandbox call without leaving this page.

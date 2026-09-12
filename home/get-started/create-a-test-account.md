@@ -41,7 +41,7 @@ curl https://api.test.paysafe.com/paymenthub/v1/paymentmethods \
 {% step %}
 ### Take a test payment
 
-Follow the [quickstart](https://app.gitbook.com/s/XSPACE_APIS/getting-started/quickstart) with a test card.
+Follow the [quickstart](https://app.gitbook.com/s/YjnAGVmcGiEiZme2Neu4/getting-started/quickstart) with a test card.
 {% endstep %}
 {% endstepper %}
 
@@ -68,4 +68,4 @@ Any future expiry date and any three-digit CVV will pass validation (four digits
 * **Production rate limits.** Test limits are lower — do not use test to size your throughput.
 {% endhint %}
 
-For deterministic outcomes beyond the test card list, create a **simulation** — it forces a specific status or decline code on your next transaction. See the [Payment Handles API](https://app.gitbook.com/s/XSPACE_APIS/payment-handles-api/).
+For deterministic outcomes beyond the test card list, create a **simulation** — it forces a specific status or decline code on your next transaction. See the [Payment Handles API](https://app.gitbook.com/s/YjnAGVmcGiEiZme2Neu4/payment-handles-api/).

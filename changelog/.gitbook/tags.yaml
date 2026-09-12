@@ -1,22 +1,28 @@
-tags:
-  - id: payments-api
-    label: Payments API
-    color: purple
-  - id: cards-api
-    label: Cards API
-    color: blue
-  - id: sdks
-    label: SDKs
-    color: green
-  - id: payment-methods
-    label: Payment methods
-    color: orange
-  - id: shopping-carts
-    label: Shopping carts
-    color: teal
-  - id: onboarding
-    label: Onboarding
-    color: pink
-  - id: breaking
-    label: Breaking change
-    color: red
+# Tags for the Updates block in README.md.
+#
+# This file is a BARE ARRAY — no top-level `tags:` key, or Git Sync fails with
+# 'Failed to parse YAML configuration file "tags.yaml": expected array, received object'.
+# Each entry is `tag` (the id used in {% update tags="..." %}), `label`, and an
+# optional Font Awesome `icon` name without the fa- prefix. There is no `color` field.
+
+- tag: payments-api
+  label: Payments API
+  icon: credit-card
+- tag: cards-api
+  label: Cards API
+  icon: credit-card-front
+- tag: sdks
+  label: SDKs
+  icon: cubes
+- tag: payment-methods
+  label: Payment methods
+  icon: money-bill-transfer
+- tag: shopping-carts
+  label: Shopping carts
+  icon: cart-shopping
+- tag: onboarding
+  label: Onboarding
+  icon: id-card
+- tag: breaking
+  label: Breaking change
+  icon: triangle-exclamation

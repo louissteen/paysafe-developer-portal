@@ -11,8 +11,10 @@
 #
 # This is the documented two-merge rollout for structure-as-code.
 
+site: site_gP85b   # Paysafe Developer Portal (Git-Synced)
+
 spaces:
-  XSPACE_HOME: ""        # home/          — section "Home"
-  XSPACE_APIS: ""        # apis-and-sdks/ — section "APIs & SDKs"
-  XSPACE_SUPPORT: ""     # support/       — section "Support & Resources"
-  XSPACE_CHANGELOG: ""   # changelog/     — section "Changelog"
+  XSPACE_HOME: "VQHBBY7AKKsm5pK8l7Ix"        # home/          — section "Home"
+  XSPACE_APIS: "YjnAGVmcGiEiZme2Neu4"        # apis-and-sdks/ — section "APIs & SDKs"
+  XSPACE_SUPPORT: "s32UcT9FwtQGR4UN7RvJ"     # support/       — section "Support & Resources"
+  XSPACE_CHANGELOG: "mH0d2WOfwPMJtdaq2oGk"   # changelog/     — section "Changelog"

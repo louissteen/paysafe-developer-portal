@@ -7,7 +7,7 @@ icon: bolt
 
 By the end of this page you will have created a payment handle, used it to take a $49.99 payment, and read the result back. Everything runs against the test environment, so no funds move.
 
-**You will need** a test account and its API key — see [Create a test account](https://app.gitbook.com/s/XSPACE_HOME/get-started/create-a-test-account.md).
+**You will need** a test account and its API key — see [Create a test account](https://app.gitbook.com/s/VQHBBY7AKKsm5pK8l7Ix/get-started/create-a-test-account.md).
 
 {% stepper %}
 {% step %}
@@ -185,4 +185,4 @@ Looking a payment up by your own `merchantRefNum` is the correct way to recover 
 
 ## What to do next
 
-<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Stop sending card data</strong></td><td>Move card capture into Paysafe JS so your servers stay out of PCI scope.</td><td><a href="../sdks/paysafe-js.md">Paysafe JS</a></td></tr><tr><td><strong>Handle the result asynchronously</strong></td><td>Subscribe to webhooks instead of polling.</td><td><a href="https://app.gitbook.com/s/XSPACE_SUPPORT/tutorials/handling-webhooks.md">Handling webhooks</a></td></tr><tr><td><strong>Store the card</strong></td><td>Save the instrument for repeat and recurring payments.</td><td><a href="../customer-vault-api/">Customer Vault API</a></td></tr><tr><td><strong>Go live</strong></td><td>The checklist before you switch to production credentials.</td><td><a href="https://app.gitbook.com/s/XSPACE_SUPPORT/guides/going-live.md">Go live checklist</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Stop sending card data</strong></td><td>Move card capture into Paysafe JS so your servers stay out of PCI scope.</td><td><a href="../sdks/paysafe-js.md">Paysafe JS</a></td></tr><tr><td><strong>Handle the result asynchronously</strong></td><td>Subscribe to webhooks instead of polling.</td><td><a href="https://app.gitbook.com/s/s32UcT9FwtQGR4UN7RvJ/tutorials/handling-webhooks.md">Handling webhooks</a></td></tr><tr><td><strong>Store the card</strong></td><td>Save the instrument for repeat and recurring payments.</td><td><a href="../customer-vault-api/">Customer Vault API</a></td></tr><tr><td><strong>Go live</strong></td><td>The checklist before you switch to production credentials.</td><td><a href="https://app.gitbook.com/s/s32UcT9FwtQGR4UN7RvJ/guides/going-live.md">Go live checklist</a></td></tr></tbody></table>

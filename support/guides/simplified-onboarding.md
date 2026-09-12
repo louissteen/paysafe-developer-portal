@@ -7,7 +7,7 @@ icon: clipboard-check
 
 # Simplified Onboarding
 
-Simplified Onboarding is the no-code counterpart to the [Applications API](https://app.gitbook.com/s/XSPACE_APIS/applications-api/). Paysafe hosts the application form; you send merchants a link and watch decisions land in the Merchant Portal.
+Simplified Onboarding is the no-code counterpart to the [Applications API](https://app.gitbook.com/s/YjnAGVmcGiEiZme2Neu4/applications-api/). Paysafe hosts the application form; you send merchants a link and watch decisions land in the Merchant Portal.
 
 ## When to choose it
 

@@ -86,7 +86,7 @@ document.querySelector("#pay").addEventListener("click", async () => {
 | `binNotification` | Enough digits to identify the BIN | Show the card brand, or switch currency |
 
 {% hint style="info" %}
-`binNotification` was called `badBin` before February 2026. The old name no longer fires — see the [changelog](https://app.gitbook.com/s/XSPACE_CHANGELOG/).
+`binNotification` was called `badBin` before February 2026. The old name no longer fires — see the [changelog](https://app.gitbook.com/s/mH0d2WOfwPMJtdaq2oGk/).
 {% endhint %}
 
 ## Apple Pay and Google Pay

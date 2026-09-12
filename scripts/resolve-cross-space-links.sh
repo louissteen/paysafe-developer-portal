@@ -21,8 +21,16 @@ for key in "${KEYS[@]}"; do
   SED_ARGS+=(-e "s|${key}|${id}|g")
 done
 
-mapfile -t FILES < <(find . -name '*.md' -not -path './.git/*')
-sed -i '' "${SED_ARGS[@]}" "${FILES[@]}"
+# NOTE: no mapfile / readarray here — macOS ships bash 3.2, which lacks both.
+# -print0 + xargs -0 also keeps paths with spaces intact.
+if sed --version >/dev/null 2>&1; then
+  INPLACE=(-i)            # GNU sed
+else
+  INPLACE=(-i '')         # BSD / macOS sed
+fi
+
+find . -name '*.md' -not -path './.git/*' -print0 \
+  | xargs -0 sed "${INPLACE[@]}" "${SED_ARGS[@]}"
 
 remaining=$(grep -rl 'XSPACE_' --include='*.md' . | wc -l | tr -d ' ')
-echo "done — ${#FILES[@]} files scanned, ${remaining} still containing a sentinel"
+echo "done — ${remaining} file(s) still containing a sentinel"

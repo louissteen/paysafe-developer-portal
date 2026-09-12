@@ -46,7 +46,7 @@ Credentials are **not** interchangeable. A production key against the test host 
 
 Outbound calls go to the base URLs above over TLS 1.2+. Paysafe does not publish a static IP range for inbound API calls, so allowlisting by hostname is the supported approach.
 
-For **webhooks**, Paysafe calls your endpoint from a published set of ranges. Request the current list from support before you configure a firewall rule, and verify the signature on every delivery rather than relying on source IP alone — see [Handling webhooks](https://app.gitbook.com/s/XSPACE_SUPPORT/tutorials/handling-webhooks.md).
+For **webhooks**, Paysafe calls your endpoint from a published set of ranges. Request the current list from support before you configure a firewall rule, and verify the signature on every delivery rather than relying on source IP alone — see [Handling webhooks](https://app.gitbook.com/s/s32UcT9FwtQGR4UN7RvJ/tutorials/handling-webhooks.md).
 
 ## Status
 

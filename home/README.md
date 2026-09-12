@@ -32,12 +32,12 @@ Paysafe moves money for thousands of businesses across 120 countries and 70 paym
 Whatever you are building, the integration starts with one REST API, one set of credentials and a test environment that behaves exactly like production.
 
 {% hint style="info" %}
-**New here?** The [quickstart](https://app.gitbook.com/s/XSPACE_APIS/getting-started/quickstart) takes a card payment end to end in about ten minutes, using a test account you can create for free.
+**New here?** The [quickstart](https://app.gitbook.com/s/YjnAGVmcGiEiZme2Neu4/getting-started/quickstart) takes a card payment end to end in about ten minutes, using a test account you can create for free.
 {% endhint %}
 {% endcolumn %}
 
 {% column width="42%" %}
-<table data-view="cards" data-full-width="false"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Start building</strong></td><td>Take your first payment in ten minutes.</td><td><a href="https://app.gitbook.com/s/XSPACE_APIS/getting-started/quickstart">Quickstart</a></td></tr><tr><td><strong>Browse the API</strong></td><td>200 endpoints across eight REST APIs.</td><td><a href="https://app.gitbook.com/s/XSPACE_APIS/">API reference</a></td></tr><tr><td><strong>Get a test account</strong></td><td>Free sandbox credentials, no contract.</td><td><a href="https://developer.paysafe.com/en/support/">Sign up</a></td></tr></tbody></table>
+<table data-view="cards" data-full-width="false"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Start building</strong></td><td>Take your first payment in ten minutes.</td><td><a href="https://app.gitbook.com/s/YjnAGVmcGiEiZme2Neu4/getting-started/quickstart">Quickstart</a></td></tr><tr><td><strong>Browse the API</strong></td><td>200 endpoints across eight REST APIs.</td><td><a href="https://app.gitbook.com/s/YjnAGVmcGiEiZme2Neu4/">API reference</a></td></tr><tr><td><strong>Get a test account</strong></td><td>Free sandbox credentials, no contract.</td><td><a href="https://developer.paysafe.com/en/support/">Sign up</a></td></tr></tbody></table>
 {% endcolumn %}
 {% endcolumns %}
 
@@ -47,7 +47,7 @@ Whatever you are building, the integration starts with one REST API, one set of 
 
 Four ways to accept money, from a fully hosted checkout to a raw REST integration. Most teams start with Paysafe Checkout and move down the stack as their requirements grow.
 
-<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th><th data-hidden data-type="files"></th></tr></thead><tbody><tr><td><strong>Payments API</strong></td><td>Connect your application to our REST-based Payments API to process payments across every method Paysafe supports.</td><td><em>Full control · Server-side</em></td><td><a href="https://app.gitbook.com/s/XSPACE_APIS/payments-api/">Payments API</a></td><td><a href=".gitbook/assets/icon-payments-api.svg">icon-payments-api.svg</a></td></tr><tr><td><strong>Paysafe Checkout</strong></td><td>A customizable, secure checkout accepting every enabled payment method through a single integration.</td><td><em>Fastest · Hosted</em></td><td><a href="https://app.gitbook.com/s/XSPACE_APIS/sdks/paysafe-checkout.md">Paysafe Checkout</a></td><td><a href=".gitbook/assets/icon-checkout.svg">icon-checkout.svg</a></td></tr><tr><td><strong>Paysafe JS</strong></td><td>Embed payment fields directly in your own form. Sensitive data never touches your servers, so PCI scope stays at SAQ A.</td><td><em>Your UI · PCI-light</em></td><td><a href="https://app.gitbook.com/s/XSPACE_APIS/sdks/paysafe-js.md">Paysafe JS</a></td><td><a href=".gitbook/assets/icon-paysafe-js.svg">icon-paysafe-js.svg</a></td></tr><tr><td><strong>Embedded Wallets</strong></td><td>Give your customers a wallet inside your product — add funds, hold balances, spend and withdraw.</td><td><em>Balances · Payouts</em></td><td><a href="https://app.gitbook.com/s/XSPACE_APIS/embedded-wallets-api/">Embedded Wallets</a></td><td><a href=".gitbook/assets/icon-wallet.svg">icon-wallet.svg</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th><th data-hidden data-type="files"></th></tr></thead><tbody><tr><td><strong>Payments API</strong></td><td>Connect your application to our REST-based Payments API to process payments across every method Paysafe supports.</td><td><em>Full control · Server-side</em></td><td><a href="https://app.gitbook.com/s/YjnAGVmcGiEiZme2Neu4/payments-api/">Payments API</a></td><td><a href=".gitbook/assets/icon-payments-api.svg">icon-payments-api.svg</a></td></tr><tr><td><strong>Paysafe Checkout</strong></td><td>A customizable, secure checkout accepting every enabled payment method through a single integration.</td><td><em>Fastest · Hosted</em></td><td><a href="https://app.gitbook.com/s/YjnAGVmcGiEiZme2Neu4/sdks/paysafe-checkout.md">Paysafe Checkout</a></td><td><a href=".gitbook/assets/icon-checkout.svg">icon-checkout.svg</a></td></tr><tr><td><strong>Paysafe JS</strong></td><td>Embed payment fields directly in your own form. Sensitive data never touches your servers, so PCI scope stays at SAQ A.</td><td><em>Your UI · PCI-light</em></td><td><a href="https://app.gitbook.com/s/YjnAGVmcGiEiZme2Neu4/sdks/paysafe-js.md">Paysafe JS</a></td><td><a href=".gitbook/assets/icon-paysafe-js.svg">icon-paysafe-js.svg</a></td></tr><tr><td><strong>Embedded Wallets</strong></td><td>Give your customers a wallet inside your product — add funds, hold balances, spend and withdraw.</td><td><em>Balances · Payouts</em></td><td><a href="https://app.gitbook.com/s/YjnAGVmcGiEiZme2Neu4/embedded-wallets-api/">Embedded Wallets</a></td><td><a href=".gitbook/assets/icon-wallet.svg">icon-wallet.svg</a></td></tr></tbody></table>
 
 ***
 
@@ -159,7 +159,7 @@ echo $payment->status; // "COMPLETED"
 {% endtabs %}
 
 {% hint style="warning" %}
-`amount` is always an integer in the currency's **minor unit**. `4999` is $49.99. Sending `49.99` will be rejected — see [currency codes](https://app.gitbook.com/s/XSPACE_SUPPORT/reference-information/currency-codes).
+`amount` is always an integer in the currency's **minor unit**. `4999` is $49.99. Sending `49.99` will be rejected — see [currency codes](https://app.gitbook.com/s/s32UcT9FwtQGR4UN7RvJ/reference-information/currency-codes).
 {% endhint %}
 
 ***
@@ -198,7 +198,7 @@ echo $payment->status; // "COMPLETED"
 
 If you onboard merchants of your own — a marketplace, a platform, a PayFac — Paysafe can underwrite and board them for you.
 
-<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Applications API</strong></td><td>A white-labelled merchant onboarding experience using our REST-based API, with bulk submission for high-volume platforms.</td><td><a href="https://app.gitbook.com/s/XSPACE_APIS/applications-api/">Applications API</a></td></tr><tr><td><strong>Simplified Onboarding</strong></td><td>A ready-made online application form that requires no development work at all. Send merchants a link and track decisions in the portal.</td><td><a href="https://app.gitbook.com/s/XSPACE_SUPPORT/guides/simplified-onboarding.md">Simplified Onboarding</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Applications API</strong></td><td>A white-labelled merchant onboarding experience using our REST-based API, with bulk submission for high-volume platforms.</td><td><a href="https://app.gitbook.com/s/YjnAGVmcGiEiZme2Neu4/applications-api/">Applications API</a></td></tr><tr><td><strong>Simplified Onboarding</strong></td><td>A ready-made online application form that requires no development work at all. Send merchants a link and track decisions in the portal.</td><td><a href="https://app.gitbook.com/s/s32UcT9FwtQGR4UN7RvJ/guides/simplified-onboarding.md">Simplified Onboarding</a></td></tr></tbody></table>
 
 ***
 
@@ -206,13 +206,13 @@ If you onboard merchants of your own — a marketplace, a platform, a PayFac —
 
 Drop-in libraries for the languages and platforms most Paysafe integrations are built on.
 
-<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Server-side</strong></td><td>Java · PHP · Node.js · Python · .NET</td><td><a href="https://app.gitbook.com/s/XSPACE_APIS/sdks/server-side-sdks.md">Server-side SDKs</a></td></tr><tr><td><strong>Mobile</strong></td><td>Android · iOS · React Native</td><td><a href="https://app.gitbook.com/s/XSPACE_APIS/sdks/mobile-sdks.md">Mobile SDKs</a></td></tr><tr><td><strong>Web</strong></td><td>Paysafe JS · Paysafe Checkout</td><td><a href="https://app.gitbook.com/s/XSPACE_APIS/sdks/paysafe-js.md">Paysafe JS</a></td></tr><tr><td><strong>Embedded Wallets SDK</strong></td><td>Web and mobile wallet surfaces</td><td><a href="https://app.gitbook.com/s/XSPACE_APIS/sdks/embedded-wallets-sdk.md">Embedded Wallets SDK</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Server-side</strong></td><td>Java · PHP · Node.js · Python · .NET</td><td><a href="https://app.gitbook.com/s/YjnAGVmcGiEiZme2Neu4/sdks/server-side-sdks.md">Server-side SDKs</a></td></tr><tr><td><strong>Mobile</strong></td><td>Android · iOS · React Native</td><td><a href="https://app.gitbook.com/s/YjnAGVmcGiEiZme2Neu4/sdks/mobile-sdks.md">Mobile SDKs</a></td></tr><tr><td><strong>Web</strong></td><td>Paysafe JS · Paysafe Checkout</td><td><a href="https://app.gitbook.com/s/YjnAGVmcGiEiZme2Neu4/sdks/paysafe-js.md">Paysafe JS</a></td></tr><tr><td><strong>Embedded Wallets SDK</strong></td><td>Web and mobile wallet surfaces</td><td><a href="https://app.gitbook.com/s/YjnAGVmcGiEiZme2Neu4/sdks/embedded-wallets-sdk.md">Embedded Wallets SDK</a></td></tr></tbody></table>
 
 ***
 
 ## What's new
 
-The five most recent documentation and API changes. The [full changelog](https://app.gitbook.com/s/XSPACE_CHANGELOG/) goes back to March 2025 and is filterable by product.
+The five most recent documentation and API changes. The [full changelog](https://app.gitbook.com/s/mH0d2WOfwPMJtdaq2oGk/) goes back to March 2025 and is filterable by product.
 
 | Date | Change | Area |
 |---|---|---|
@@ -230,10 +230,10 @@ The five most recent documentation and API changes. The [full changelog](https:/
 {% column width="50%" %}
 ### Popular guides
 
-* [Accept your first card payment](https://app.gitbook.com/s/XSPACE_SUPPORT/tutorials/accept-a-card-payment.md)
-* [Store a card for recurring billing](https://app.gitbook.com/s/XSPACE_SUPPORT/tutorials/recurring-payments.md)
-* [Handle webhooks reliably](https://app.gitbook.com/s/XSPACE_SUPPORT/tutorials/handling-webhooks.md)
-* [Go live checklist](https://app.gitbook.com/s/XSPACE_SUPPORT/guides/going-live.md)
+* [Accept your first card payment](https://app.gitbook.com/s/s32UcT9FwtQGR4UN7RvJ/tutorials/accept-a-card-payment.md)
+* [Store a card for recurring billing](https://app.gitbook.com/s/s32UcT9FwtQGR4UN7RvJ/tutorials/recurring-payments.md)
+* [Handle webhooks reliably](https://app.gitbook.com/s/s32UcT9FwtQGR4UN7RvJ/tutorials/handling-webhooks.md)
+* [Go live checklist](https://app.gitbook.com/s/s32UcT9FwtQGR4UN7RvJ/guides/going-live.md)
 {% endcolumn %}
 
 {% column width="50%" %}

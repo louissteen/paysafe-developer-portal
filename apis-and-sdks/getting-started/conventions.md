@@ -22,7 +22,7 @@ These rules apply to all eight APIs. Learn them once.
 | ¥1,250 | JPY | 0 | `1250` |
 | 1.500 KWD | KWD | 3 | `1500` |
 
-The exponent for every supported currency is in [Currency codes](https://app.gitbook.com/s/XSPACE_SUPPORT/reference-information/currency-codes).
+The exponent for every supported currency is in [Currency codes](https://app.gitbook.com/s/s32UcT9FwtQGR4UN7RvJ/reference-information/currency-codes).
 
 ```javascript
 // Do this
@@ -106,7 +106,7 @@ Treat any non-terminal status as "not yet decided". Do not release goods on `PEN
 
 ## Field constraints
 
-* Strings are UTF-8. A small set of characters is rejected everywhere — see [Global invalid characters](https://app.gitbook.com/s/XSPACE_SUPPORT/reference-information/global-invalid-characters.md).
+* Strings are UTF-8. A small set of characters is rejected everywhere — see [Global invalid characters](https://app.gitbook.com/s/s32UcT9FwtQGR4UN7RvJ/reference-information/global-invalid-characters.md).
 * `country` is ISO 3166-1 alpha-2, uppercase. `GB`, never `UK`.
 * `state` is the ISO 3166-2 subdivision code for US and Canadian addresses.
 * Unknown fields in a request body are rejected, not ignored.

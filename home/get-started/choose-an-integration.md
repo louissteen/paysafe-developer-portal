@@ -53,4 +53,4 @@ These are not mutually exclusive. A common shape is Paysafe Checkout for first-t
 ## Next
 
 * [Create a test account](create-a-test-account.md)
-* [Quickstart](https://app.gitbook.com/s/XSPACE_APIS/getting-started/quickstart)
+* [Quickstart](https://app.gitbook.com/s/YjnAGVmcGiEiZme2Neu4/getting-started/quickstart)
