@@ -1,140 +1,63 @@
-# Finishing the setup
+# Setup — complete
 
-Everything that GitBook's API can do is done. Two steps remain: one in the
-GitBook UI (Git Sync cannot be configured over the API), and one afterwards to
-resolve the cross-space links.
+The site is live, synced and published. This file is now a record of how it is
+wired and what to do when you change things.
 
 | | |
 |---|---|
-| **Repository** | `louissteen/paysafe-developer-portal` (private) |
+| **Live site** | https://paysafe.gitbook.io/paysafe-docs/ |
+| **Repository** | `louissteen/paysafe-developer-portal` (public) |
 | **Branch** | `main` |
-| **GitBook site** | Paysafe Developer Portal — `site_V9Mee` |
+| **GitBook site** | `site_gP85b` |
 | **Organization** | Paysafe — `kqsYHgfyM6lAFN5jPss0` |
-| **Dashboard** | https://app.gitbook.com/o/kqsYHgfyM6lAFN5jPss0/sites/site_V9Mee |
+| **Dashboard** | https://app.gitbook.com/o/kqsYHgfyM6lAFN5jPss0/sites/site_gP85b |
 
----
+## How it is wired
 
-## Step 1 — Connect Git Sync (one connection, not four)
+**Git Sync** connects the site to the repo once, at site level. `gitbook-docs.yaml`
+declares the sections and spaces, so GitBook created all four spaces itself and
+maps each to its directory. Editing is two-way: UI edits arrive here as commits.
 
-Because the site structure is declared in `gitbook-docs.yaml`, you connect the
-**site** to the repo once. GitBook then creates all four spaces and maps each to
-its directory automatically.
+| Space | Directory | Space id |
+|---|---|---|
+| Home | `./home` | `VQHBBY7AKKsm5pK8l7Ix` |
+| APIs & SDKs | `./apis-and-sdks` | `YjnAGVmcGiEiZme2Neu4` |
+| Support & Resources | `./support` | `s32UcT9FwtQGR4UN7RvJ` |
+| Changelog | `./changelog` | `mH0d2WOfwPMJtdaq2oGk` |
 
-1. Open the site dashboard:
-   **https://app.gitbook.com/o/kqsYHgfyM6lAFN5jPss0/sites/site_V9Mee**
-2. Go to **Settings → Git Sync**.
-3. Choose **GitHub** and authorize the GitBook app if prompted.
-   Grant it access to **`louissteen/paysafe-developer-portal`** — it is a private
-   repo, so it must be selected explicitly in the GitHub app permissions screen.
-4. Repository: **`louissteen/paysafe-developer-portal`**
-5. Branch: **`main`**
-6. Project directory: **leave empty** (`gitbook-docs.yaml` is at the repo root).
-7. Initial sync direction: **GitHub → GitBook** — the repo is the source of truth.
-8. Click **Initialize** and wait for the import.
+**OpenAPI specs** are registered at organization level by URL, pointing at this
+repo's raw files on `main`. GitBook re-fetches every 6 hours.
 
-### What to expect on that first import
-
-GitBook creates four spaces in one merge. Two documented quirks apply:
-
-> **Each new space exports its own empty initial revision back to the repo**, which
-> races the import. When the export wins, it overwrites that directory's
-> `README.md` with `# Page` and truncates its `SUMMARY.md`.
-
-Check for it once the import settles:
+## Changing things
 
 ```bash
-git pull
-git log --oneline | grep "GitBook: Export content from" || echo "no export commits - clean"
-git diff HEAD~1 --stat
-```
+# content, structure or specs — just merge
+git push origin main
 
-If any `README.md` or `SUMMARY.md` came back blank, restore it and push again:
-
-```bash
-git checkout <the-commit-before-the-export> -- home/ apis-and-sdks/ support/ changelog/
-git commit -m "Restore content clobbered by initial space export"
-git push
-```
-
----
-
-## Step 2 — Resolve the cross-space links
-
-44 links cross a space boundary. They are written as `XSPACE_*` sentinels because
-real space ids do not exist until Step 1 creates the spaces.
-
-1. Read the ids back:
-
-```bash
-curl -s -H "Authorization: Bearer $(cat ~/.gitbook_token)" \
-  "https://api.gitbook.com/v1/orgs/kqsYHgfyM6lAFN5jPss0/sites/site_V9Mee/structure" \
-| python3 -c "
-import json,sys
-def walk(n):
-    for x in n:
-        if x.get('object')=='site-space': print(f\"  {x['space']['title']:24s} {x['space']['id']}\")
-        for k in ('sections','siteSpaces','children'):
-            if k in x: walk(x[k])
-walk(json.load(sys.stdin).get('structure',{}).get('sections',[]))"
-```
-
-2. Paste them into `cross-space-links.yaml`.
-3. Run the resolver and push:
-
-```bash
-scripts/resolve-cross-space-links.sh
-git commit -am "Resolve cross-space link sentinels"
-git push
-```
-
-Until this runs, those links point at a non-existent space. Everything else works.
-
-> **Resolver lag.** Cross-space content references can take 30+ minutes to start
-> resolving, and published pages are cached per content revision — so a page
-> rendered before the resolver caught up stays stale. If links still look wrong an
-> hour later, make a no-op commit touching the affected space directory to force a
-> re-render.
-
----
-
-## Step 3 — Publish the site
-
-The site is created but **not yet published**. Once the content looks right:
-
-**Site dashboard → Publish**.
-
----
-
-## The OpenAPI specs — already done
-
-All 8 specs are registered and processed (`complete`, zero errors). They are
-registered **by URL** against this repository, so GitBook re-fetches them every
-6 hours on its own.
-
-| Spec | Operations |
-|---|---|
-| `paysafe-payments-v1` | 38 |
-| `paysafe-embedded-wallets-v1` | 30 |
-| `paysafe-cards-v1` | 29 |
-| `paysafe-customer-vault-v1` | 27 |
-| `paysafe-applications-v1` | 25 |
-| `paysafe-digital-wallets-v1` | 21 |
-| `paysafe-threeds-v2` | 16 |
-| `paysafe-payment-handles-v1` | 14 |
-| **Total** | **200** |
-
-Changing a spec means merging to `main` and waiting, or forcing a refresh:
-
-```bash
+# force an immediate spec refresh instead of waiting up to 6 hours
 scripts/publish-specs.sh
 ```
 
-Manage them at
-https://app.gitbook.com/o/kqsYHgfyM6lAFN5jPss0/openapi
+> **Always `git pull` before you push.** Git Sync is two-way: edits made in the
+> GitBook UI arrive here as commits, and pushing stale files over them erases
+> that work silently.
 
-> **The repository must stay public** for URL-based refresh to keep working.
-> Making it private again will not break what is already rendered — GitBook keeps
-> the last good version — but future refreshes will silently stop.
+## Three things that bit us, so they do not bite again
+
+1. **Exactly one section needs `default: true`** in `gitbook-docs.yaml` — the one
+   served at the site root. Zero or two fails the whole sync with
+   *"Site configs with sections must include exactly one section with default: true"*.
+   The `default: true` on a *space* is unrelated (it picks the default variant).
+
+2. **`.gitbook/tags.yaml` is a bare array**, not an object with a `tags:` key.
+   Entries are `tag` / `label` / `icon` — there is no `color` field. The wrong
+   shape fails only that space, so the rest of the site syncs and it looks like
+   the changelog is merely empty.
+
+3. **Cross-space links need real space ids**, which only exist after the first
+   sync. They are written as `XSPACE_*` sentinels and resolved afterwards with
+   `scripts/resolve-cross-space-links.sh` (ids live in `cross-space-links.yaml`).
+   Already done — the table above is the record.
 
 ---
 
