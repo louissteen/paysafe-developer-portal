@@ -2,4 +2,4 @@ api_base_test: https://api.test.paysafe.com
 api_base_live: https://api.paysafe.com
 support_email: integration.support@paysafe.com
 portal_url: https://developer.paysafe.com
-total_operations: "200"
+total_operations: '200'
