@@ -15,7 +15,13 @@ layout:
     visible: true
   pagination:
     visible: false
+  metadata:
+    visible: true
   tags:
+    visible: true
+  actions:
+    visible: true
+  anchors:
     visible: true
 ---
 
@@ -36,6 +42,11 @@ Entries are tagged by product. Use the filter controls at the top right of the t
 {% endcolumns %}
 
 {% updates format="full" %}
+{% update date="2026-09-22" %}
+## NEW STUFF
+
+this is exciting!!
+{% endupdate %}
 
 {% update date="2026-08-14" tags="shopping-carts,payment-methods" %}
 ## Shopify payment method extensions
@@ -329,5 +340,4 @@ A refund payment page is added to the **EPS** payment method documentation.
 
 A dedicated **Address Verification Service (AVS)** documentation page is established, covering response codes and how to act on them.
 {% endupdate %}
-
 {% endupdates %}

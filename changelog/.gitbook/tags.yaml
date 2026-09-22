@@ -1,10 +1,3 @@
-# Tags for the Updates block in README.md.
-#
-# This file is a BARE ARRAY — no top-level `tags:` key, or Git Sync fails with
-# 'Failed to parse YAML configuration file "tags.yaml": expected array, received object'.
-# Each entry is `tag` (the id used in {% update tags="..." %}), `label`, and an
-# optional Font Awesome `icon` name without the fa- prefix. There is no `color` field.
-
 - tag: payments-api
   label: Payments API
   icon: credit-card
